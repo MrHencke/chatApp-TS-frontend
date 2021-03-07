@@ -1,7 +1,7 @@
-import IUser, { themes } from '../../store/models/user';
+import { IUser, themes } from '../../store/models/user';
 
 const initialUser: IUser = {
-	_id: '',
+	id: '',
 	email: '',
 	username: '',
 	name: '',

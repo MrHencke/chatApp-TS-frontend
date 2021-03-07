@@ -1,19 +1,50 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useHistory, useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import decode from 'jwt-decode';
+
 import logo from '../../assets/img/logo.png';
 import '../../assets/scss/Header.scss';
 import initialUser from '../../util/initialStates/intialUser';
+import * as actionType from '../../store/actions/actionTypes/actionTypes';
+
 //@ts-ignore
-import AccountCircleIcon from '@material-ui/icons/AccountCircle'; // TODO: Swap to a profile picture of user later
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import { IUser } from '../../store/models/user';
+
 const Header = () => {
-	//const dispatch = useDispatch();
+	const dispatch = useDispatch();
+	const history = useHistory();
+	const location = useLocation();
 	const [user, setUser] = useState(initialUser);
 
+	const getUserDetails = (token: string) => {
+		const decodedToken = decode(token);
+	};
+	console.log(user);
+
 	const logOut = (): void => {
-		//dispatch({ type: actionType.LOGOUT})
-		//delete JWT from localstorage
+		dispatch({ type: actionType.LOGOUT });
+		history.push('/');
 		setUser(initialUser);
 	};
+
+	useEffect(() => {
+		const token = user.token;
+
+		if (token) {
+			const decodedToken: any = decode(token); //swap to proper type later, defined in user model
+
+			if (decodedToken.exp * 1000 < new Date().getTime()) logOut();
+		}
+
+		if (localStorage.getItem('profile')) {
+			const decoded: IUser = decode(localStorage.getItem('profile')!);
+			setUser(decoded);
+		} else {
+			setUser(initialUser);
+		}
+	}, [location]);
 
 	const userLoggedIn = (): boolean => {
 		return user.name !== '';
