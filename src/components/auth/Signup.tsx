@@ -1,20 +1,27 @@
 import React, { FormEvent, useState } from 'react';
-import '../../assets/scss/Login.scss';
-import initialForm from '../../util/initialStates/initialLogin';
-import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { login } from '../../store/actions/auth';
+import { Link, useHistory } from 'react-router-dom';
+import '../../assets/scss/Login.scss';
+import initialForm from '../../util/initialStates/initialSignUp';
+import { signup } from '../../store/actions/auth';
 
-const Login = () => {
+const Signup = () => {
 	const history = useHistory();
+
 	const dispatch = useDispatch();
 
 	const [form, setForm] = useState(initialForm);
+	const [passwordsMatch, setPasswordsMatch] = useState(true);
 
 	const handleSubmit = (e: FormEvent) => {
 		e.preventDefault();
-		console.log(form);
-		dispatch(login(form, history));
+		if (form.password !== form.repeatedpassword) {
+			setPasswordsMatch(false);
+			return;
+		} else {
+			dispatch(signup(form, history));
+			history.push('/');
+		}
 	};
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,14 +31,13 @@ const Login = () => {
 			setForm({ ...form, [e.target.name]: e.target.value });
 		}
 	};
-
 	return (
 		<div className="container">
 			<div className="row">
 				<div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
 					<div className="card card-signin my-5" id="roundedCard">
 						<div className="card-body">
-							<h5 className="card-title text-center">Sign In</h5>
+							<h5 className="card-title text-center">Register</h5>
 							<form
 								className="form-signin"
 								onSubmit={handleSubmit}
@@ -54,10 +60,38 @@ const Login = () => {
 
 								<div className="form-label-group">
 									<input
+										type="text"
+										id="inputUsername"
+										name="username"
+										className="form-control"
+										placeholder="Username"
+										required
+										onChange={handleChange}
+									/>
+									<label htmlFor="inputUsername">
+										Username
+									</label>
+								</div>
+
+								<div className="form-label-group">
+									<input
+										type="text"
+										id="inputName"
+										name="name"
+										className="form-control"
+										placeholder="Name"
+										required
+										onChange={handleChange}
+									/>
+									<label htmlFor="inputName">Name</label>
+								</div>
+
+								<div className="form-label-group">
+									<input
 										type="password"
 										id="inputPassword"
-										className="form-control"
 										name="password"
+										className="form-control"
 										placeholder="Password"
 										required
 										onChange={handleChange}
@@ -67,27 +101,34 @@ const Login = () => {
 									</label>
 								</div>
 
-								<div className="custom-control custom-checkbox mb-3">
+								<div className="form-label-group">
 									<input
-										type="checkbox"
-										className="custom-control-input"
-										id="customCheck1"
+										type="password"
+										id="inputRepeatPassword"
+										name="repeatedpassword"
+										className="form-control"
+										placeholder="Repeat Password"
+										required
+										onChange={handleChange}
 									/>
-									<label
-										className="custom-control-label"
-										htmlFor="customCheck1"
-									>
-										Remember password
+									<label htmlFor="inputRepeatPassword">
+										Repeat Password
 									</label>
 								</div>
+								{passwordsMatch ? null : (
+									<div className="text-center mb-3">
+										Passwords must match
+									</div>
+								)}
+
 								<button
 									className="btn btn-lg btn-primary btn-block text-uppercase"
 									type="submit"
 								>
-									Sign in
+									Sign up
 								</button>
 								<div className="text-center mt-4 mb-1">
-									<Link to="/signup">Not signed up yet?</Link>
+									<Link to="/login">Already signed up?</Link>
 								</div>
 							</form>
 						</div>
@@ -98,4 +139,4 @@ const Login = () => {
 	);
 };
 
-export default Login;
+export default Signup;

@@ -1,15 +1,17 @@
-export enum themes {
+enum themes {
 	LIGHT = 'light',
 	DARK = 'dark',
 }
 
-export default interface IUser {
+interface IUser {
+	_id: string;
 	email: string;
 	username: string;
-	_id: string;
-	fName: string;
-	lName: string;
+	name: string;
 	password?: string;
 	isAdmin?: Boolean;
-	themePreference?: themes; //Make a type later
+	themePreference?: themes;
 }
+
+export { themes };
+export default IUser;

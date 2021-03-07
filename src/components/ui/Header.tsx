@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/img/logo.png';
-import User from '../../store/models/user';
 import '../../assets/scss/Header.scss';
-import { initialUser } from '../../util/intialUser';
+import initialUser from '../../util/initialStates/intialUser';
 //@ts-ignore
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle'; // TODO: Swap to a profile picture of user later
 const Header = () => {
 	//const dispatch = useDispatch();
 	const [user, setUser] = useState(initialUser);
@@ -16,10 +15,13 @@ const Header = () => {
 		setUser(initialUser);
 	};
 
+	const userLoggedIn = (): boolean => {
+		return user.name !== '';
+	};
 	return (
 		<div>
 			<nav className="navbar navbar-expand-lg navbar-dark bg-dark ">
-				<Link className="navbar-brand mx-3" to="#">
+				<Link className="navbar-brand mx-3" to="/">
 					<img
 						src={logo}
 						width="40"
@@ -47,12 +49,22 @@ const Header = () => {
 				>
 					<ul className="navbar-nav me-auto">
 						<li className="nav-item">
-							<Link className="nav-link" to="#">
+							<Link
+								className={`nav-link ${
+									userLoggedIn() ? '' : 'disabled'
+								}`}
+								to="/chats"
+							>
 								Chats
 							</Link>
 						</li>
 						<li className="nav-item">
-							<Link className="nav-link" to="#">
+							<Link
+								className={`nav-link ${
+									userLoggedIn() ? '' : 'disabled'
+								}`}
+								to="/contacts"
+							>
 								Contacts
 							</Link>
 						</li>
@@ -68,27 +80,55 @@ const Header = () => {
 								aria-haspopup="true"
 								aria-expanded="false"
 							>
-								Dropdown <AccountCircleIcon />
+								{userLoggedIn() ? (
+									<>{user.name}</>
+								) : (
+									<>Welcome </>
+								)}{' '}
+								<AccountCircleIcon />
 							</Link>
 
 							<div
 								className="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdown"
 							>
-								<Link className="dropdown-item" to="/settings">
-									Settings
-								</Link>
-								<Link className="dropdown-item" to="#">
-									Another action
+								{userLoggedIn() ? (
+									<Link
+										className="dropdown-item"
+										to="/settings"
+									>
+										Settings
+									</Link>
+								) : null}
+
+								<Link className="dropdown-item" to="404">
+									TODO
 								</Link>
 								<div className="dropdown-divider"></div>
-								<Link
-									className="dropdown-item"
-									to="#"
-									onClick={() => logOut()}
-								>
-									Log out
-								</Link>
+								{userLoggedIn() ? (
+									<Link
+										className="dropdown-item"
+										to="/logout"
+										onClick={() => logOut()}
+									>
+										Log Out
+									</Link>
+								) : (
+									<>
+										<Link
+											className="dropdown-item"
+											to="/login"
+										>
+											Log In
+										</Link>
+										<Link
+											className="dropdown-item"
+											to="/signup"
+										>
+											Sign Up
+										</Link>
+									</>
+								)}
 							</div>
 						</li>
 					</ul>
