@@ -6,6 +6,7 @@ import Footer from './components/ui/Footer';
 import Login from './components/auth/Login';
 import Signup from './components/auth/Signup';
 import NotFound from './components/ui/NotFound';
+import Logout from './components/auth/Logout';
 
 const App = () => {
 	return (
@@ -19,6 +20,8 @@ const App = () => {
 					<Route exact path="/contacts" component={Content} />
 					<Route exact path="/login" component={Login} />
 					<Route exact path="/signup" component={Signup} />
+					<Route exact path="/logout" component={Logout
+					} />
 					<Route path="*" component={NotFound} />
 				</Switch>
 				<Footer />

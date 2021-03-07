@@ -4,7 +4,7 @@ import ISignup from '../models/signup';
 import 'dotenv/config';
 
 const API = axios.create({
-	baseURL: 'http://localhost:8001',
+	baseURL: 'http://localhost:8002',
 });
 
 API.interceptors.request.use((req) => {

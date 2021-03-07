@@ -6,11 +6,11 @@ interface ISignup {
 	repeatedpassword: String;
 }
 
-type SignupAction = {
+type signupAction = {
 	type: string;
 	data: ISignup;
 };
 
-export type { SignupAction };
+export type { signupAction };
 
 export default ISignup;

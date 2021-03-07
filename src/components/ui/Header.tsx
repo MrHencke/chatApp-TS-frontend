@@ -1,31 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useStore } from 'react-redux';
 import decode from 'jwt-decode';
 
 import logo from '../../assets/img/logo.png';
 import '../../assets/scss/Header.scss';
-import initialUser from '../../util/initialStates/intialUser';
-import * as actionType from '../../store/actions/actionTypes/actionTypes';
+import initialUser from '../../store/initialStates/intialUser';
+import { logout } from '../../store/actions/logout/logout';
 
 //@ts-ignore
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { IUser } from '../../store/models/user';
 
 const Header = () => {
+	const store = useStore();
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const location = useLocation();
 	const [user, setUser] = useState(initialUser);
 
-	const getUserDetails = (token: string) => {
-		const decodedToken = decode(token);
-	};
-	console.log(user);
-
 	const logOut = (): void => {
-		dispatch({ type: actionType.LOGOUT });
-		history.push('/');
+		dispatch(logout(history));
 		setUser(initialUser);
 	};
 
@@ -49,6 +44,7 @@ const Header = () => {
 	const userLoggedIn = (): boolean => {
 		return user.name !== '';
 	};
+
 	return (
 		<div>
 			<nav className="navbar navbar-expand-lg navbar-dark bg-dark ">
@@ -120,25 +116,32 @@ const Header = () => {
 							</Link>
 
 							<div
-								className="dropdown-menu dropdown-menu-right"
+								className="dropdown-menu dropdown-menu-right bg-dark"
+								id="white-text"
 								aria-labelledby="navbarDropdown"
 							>
 								{userLoggedIn() ? (
 									<Link
 										className="dropdown-item"
+										id="white-text"
 										to="/settings"
 									>
 										Settings
 									</Link>
 								) : null}
 
-								<Link className="dropdown-item" to="404">
+								<Link
+									className="dropdown-item"
+									id="white-text"
+									to="404"
+								>
 									TODO
 								</Link>
 								<div className="dropdown-divider"></div>
 								{userLoggedIn() ? (
 									<Link
 										className="dropdown-item"
+										id="white-text"
 										to="/logout"
 										onClick={() => logOut()}
 									>
@@ -148,12 +151,14 @@ const Header = () => {
 									<>
 										<Link
 											className="dropdown-item"
+											id="white-text"
 											to="/login"
 										>
 											Log In
 										</Link>
 										<Link
 											className="dropdown-item"
+											id="white-text"
 											to="/signup"
 										>
 											Sign Up

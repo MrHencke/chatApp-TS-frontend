@@ -1,4 +1,4 @@
-import ISignup from '../../store/models/signup';
+import ISignup from '../models/signup';
 
 const initialUser: ISignup = {
 	email: '',

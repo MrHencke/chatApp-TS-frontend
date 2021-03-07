@@ -1,9 +1,9 @@
 import React, { FormEvent, useState } from 'react';
 import '../../assets/scss/Login.scss';
-import initialForm from '../../util/initialStates/initialLogin';
+import initialForm from '../../store/initialStates/initialLogin';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { login } from '../../store/actions/auth';
+import { login } from '../../store/actions/login/login';
 
 const Login = () => {
 	const history = useHistory();
@@ -73,12 +73,6 @@ const Login = () => {
 										className="custom-control-input"
 										id="customCheck1"
 									/>
-									<label
-										className="custom-control-label"
-										htmlFor="customCheck1"
-									>
-										Remember password
-									</label>
 								</div>
 								<button
 									className="btn btn-lg btn-primary btn-block text-uppercase"

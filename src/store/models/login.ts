@@ -1,6 +1,14 @@
 interface ILogin {
 	email: string;
 	password: string;
+	status?: number;
 }
 
-export default ILogin ;
+type loginAction = {
+	type: string;
+	data: ILogin;
+};
+
+export type { loginAction };
+
+export default ILogin;

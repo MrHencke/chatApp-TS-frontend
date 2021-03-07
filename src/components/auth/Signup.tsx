@@ -2,8 +2,8 @@ import React, { FormEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import '../../assets/scss/Login.scss';
-import initialForm from '../../util/initialStates/initialSignUp';
-import { signup } from '../../store/actions/auth';
+import initialForm from '../../store/initialStates/initialSignUp';
+import { signup } from '../../store/actions/signup/signup';
 
 const Signup = () => {
 	const history = useHistory();
