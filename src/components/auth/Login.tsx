@@ -2,12 +2,14 @@ import React, { FormEvent, useState } from 'react';
 import '../../assets/scss/Login.scss';
 import initialForm from '../../store/initialStates/initialLogin';
 import { Link, useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { login } from '../../store/actions/login/login';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../../store/actions/user/login';
+import { RootState } from '../../store/reducers';
 
 const Login = () => {
 	const history = useHistory();
 	const dispatch = useDispatch();
+	const loginError = useSelector((state: RootState) => state.user.error);
 
 	const [form, setForm] = useState(initialForm);
 
@@ -67,13 +69,11 @@ const Login = () => {
 									</label>
 								</div>
 
-								<div className="custom-control custom-checkbox mb-3">
-									<input
-										type="checkbox"
-										className="custom-control-input"
-										id="customCheck1"
-									/>
-								</div>
+								{loginError === '' ? null : (
+									<div className="text-center mb-3">
+										{loginError}
+									</div>
+								)}
 								<button
 									className="btn btn-lg btn-primary btn-block text-uppercase"
 									type="submit"

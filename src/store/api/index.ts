@@ -8,7 +8,10 @@ const API = axios.create({
 });
 
 API.interceptors.request.use((req) => {
-	if (!localStorage.getItem('profile')) {
+	if (
+		!localStorage.getItem('profile') ||
+		localStorage.getItem('profile') === undefined
+	) {
 		return req;
 	} else {
 		req.headers.Authorization = `Bearer ${

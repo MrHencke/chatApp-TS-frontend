@@ -1,12 +1,14 @@
 import React, { FormEvent, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import '../../assets/scss/Login.scss';
 import initialForm from '../../store/initialStates/initialSignUp';
-import { signup } from '../../store/actions/signup/signup';
+import { signup } from '../../store/actions/user/signup';
+import { RootState } from '../../store/reducers';
 
 const Signup = () => {
 	const history = useHistory();
+	const signUpError = useSelector((state: RootState) => state.user.error);
 
 	const dispatch = useDispatch();
 
@@ -20,7 +22,6 @@ const Signup = () => {
 			return;
 		} else {
 			dispatch(signup(form, history));
-			history.push('/');
 		}
 	};
 
@@ -118,6 +119,11 @@ const Signup = () => {
 								{passwordsMatch ? null : (
 									<div className="text-center mb-3">
 										Passwords must match
+									</div>
+								)}
+								{signUpError === '' ? null : (
+									<div className="text-center mb-3">
+										{signUpError}
 									</div>
 								)}
 

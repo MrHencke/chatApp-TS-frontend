@@ -1,48 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useHistory, useLocation } from 'react-router-dom';
-import { useDispatch, useStore } from 'react-redux';
-import decode from 'jwt-decode';
+import React from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 import logo from '../../assets/img/logo.png';
 import '../../assets/scss/Header.scss';
-import initialUser from '../../store/initialStates/intialUser';
-import { logout } from '../../store/actions/logout/logout';
+import { logout } from '../../store/actions/user/logout';
 
 //@ts-ignore
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import { IUser } from '../../store/models/user';
+import { RootState } from '../../store/reducers';
+
+//import { IProfile } from '../../store/models/profile';
 
 const Header = () => {
-	const store = useStore();
 	const dispatch = useDispatch();
 	const history = useHistory();
-	const location = useLocation();
-	const [user, setUser] = useState(initialUser);
+	const user = useSelector((state: RootState) => state.user);
 
 	const logOut = (): void => {
 		dispatch(logout(history));
-		setUser(initialUser);
-	};
-
-	useEffect(() => {
-		const token = user.token;
-
-		if (token) {
-			const decodedToken: any = decode(token); //swap to proper type later, defined in user model
-
-			if (decodedToken.exp * 1000 < new Date().getTime()) logOut();
-		}
-
-		if (localStorage.getItem('profile')) {
-			const decoded: IUser = decode(localStorage.getItem('profile')!);
-			setUser(decoded);
-		} else {
-			setUser(initialUser);
-		}
-	}, [location]);
-
-	const userLoggedIn = (): boolean => {
-		return user.name !== '';
 	};
 
 	return (
@@ -78,7 +54,7 @@ const Header = () => {
 						<li className="nav-item">
 							<Link
 								className={`nav-link ${
-									userLoggedIn() ? '' : 'disabled'
+									user.isLoggedIn ? '' : 'disabled'
 								}`}
 								to="/chats"
 							>
@@ -88,7 +64,7 @@ const Header = () => {
 						<li className="nav-item">
 							<Link
 								className={`nav-link ${
-									userLoggedIn() ? '' : 'disabled'
+									user.isLoggedIn ? '' : 'disabled'
 								}`}
 								to="/contacts"
 							>
@@ -107,8 +83,8 @@ const Header = () => {
 								aria-haspopup="true"
 								aria-expanded="false"
 							>
-								{userLoggedIn() ? (
-									<>{user.name}</>
+								{user.isLoggedIn ? (
+									<>{user.profile.name + '  '}</>
 								) : (
 									<>Welcome </>
 								)}{' '}
@@ -120,7 +96,7 @@ const Header = () => {
 								id="white-text"
 								aria-labelledby="navbarDropdown"
 							>
-								{userLoggedIn() ? (
+								{user.isLoggedIn ? (
 									<Link
 										className="dropdown-item"
 										id="white-text"
@@ -138,7 +114,7 @@ const Header = () => {
 									TODO
 								</Link>
 								<div className="dropdown-divider"></div>
-								{userLoggedIn() ? (
+								{user.isLoggedIn ? (
 									<Link
 										className="dropdown-item"
 										id="white-text"

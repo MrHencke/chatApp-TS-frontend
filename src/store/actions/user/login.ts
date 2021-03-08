@@ -4,19 +4,20 @@ import ILogin from '../../models/login';
 import { Dispatch } from 'redux';
 
 const login = (formData: ILogin, router: any) => async (dispatch: Dispatch) => {
+	console.log(formData);
 	await api
 		.login(formData)
 		.then((data) => {
+			console.log(data);
 			if (data) {
 				if (data.status === 200) {
-					dispatch({ type: LOGIN_SUCCESS, data });
+					dispatch({ type: LOGIN_SUCCESS, payload: data });
 					router.push('/');
 				}
 			}
 		})
 		.catch((data) => {
-			console.log(data);
-			dispatch({ type: LOGIN_FAILURE, data });
+			dispatch({ type: LOGIN_FAILURE, payload: data.response });
 		});
 };
 

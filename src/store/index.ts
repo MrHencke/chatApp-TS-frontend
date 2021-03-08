@@ -1,10 +1,10 @@
-import { createStore, applyMiddleware, compose, Store } from 'redux';
+import { createStore, applyMiddleware, Store } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import reducers from './reducers';
+import { RootReducer, RootState } from './reducers';
 import logger from 'redux-logger';
 
-export function configureStore(initialState?: any): Store {
+export function configureStore(initialState?: RootState): Store<RootState> {
 	let middleware = applyMiddleware(thunk, logger);
 
 	if (process.env.NODE_ENV !== 'production') {
@@ -12,10 +12,10 @@ export function configureStore(initialState?: any): Store {
 	}
 
 	const store = createStore(
-		reducers as any,
+		RootReducer as any,
 		initialState as any,
 		middleware
-	) as Store;
+	) as Store<RootState>;
 
 	return store;
 }

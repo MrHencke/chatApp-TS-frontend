@@ -1,20 +1,13 @@
-import { CancelToken } from 'axios';
-
-enum themes {
-	LIGHT = 'light',
-	DARK = 'dark',
-}
+import { IProfile } from './profile';
 
 interface IUser {
-	id: string;
-	email: string;
-	username: string;
-	name: string;
-	token?: string;
-	password?: string;
-	isAdmin?: Boolean;
-	themePreference?: themes;
+	profile: IProfile;
+	token: string;
+	loading: boolean;
+	error: string;
+	isLoggedIn: boolean;
+	status?: number;
+	message?: string;
 }
 
-export { themes };
 export type { IUser };

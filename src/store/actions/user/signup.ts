@@ -6,17 +6,19 @@ import { Dispatch } from 'redux';
 const signup = (formData: ISignup, router: any) => async (
 	dispatch: Dispatch
 ) => {
-	try {
-		const { data } = await api.signup(formData);
-
-		dispatch({ type: SIGNUP_SUCCESS, data });
-
-		router.push('/');
-	} catch (error) {
-		console.log(error);
-	}
+	await api
+		.signup(formData)
+		.then((data) => {
+			if (data) {
+				if (data.status === 201) {
+					dispatch({ type: SIGNUP_SUCCESS, payload: data });
+					router.push('/');
+				}
+			}
+		})
+		.catch((data) => {
+			dispatch({ type: SIGNUP_FAILURE, payload: data.response });
+		});
 };
 
 export { signup };
-
-// TODO Shape file like login feature with error handling
