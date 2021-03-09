@@ -44,6 +44,7 @@ const userReducer: Reducer<IUser, userAction> = (
 			return {
 				...state,
 				profile: action.payload.data.profile,
+				isLoggedIn: true,
 				token: action.payload.data.token,
 				loading: false,
 				error: '',

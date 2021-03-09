@@ -7,22 +7,27 @@ import Login from './components/auth/Login';
 import Signup from './components/auth/Signup';
 import NotFound from './components/ui/NotFound';
 import Logout from './components/auth/Logout';
+import ResponsePage from './components/ui/ResponsePage';
 
 const App = () => {
 	return (
 		<Router>
-			<main className="app d-flex flex-column min-vh-100">
+			<main className='app d-flex flex-column min-vh-100'>
 				<Header />
 				<Switch>
-					<Route exact path="/" component={Content} />
-					<Route exact path="/settings" component={Content} />
-					<Route exact path="/chats" component={Content} />
-					<Route exact path="/contacts" component={Content} />
-					<Route exact path="/login" component={Login} />
-					<Route exact path="/signup" component={Signup} />
-					<Route exact path="/logout" component={Logout
-					} />
-					<Route path="*" component={NotFound} />
+					<Route exact path='/' component={Content} />
+					<Route exact path='/settings' component={Content} />
+					<Route exact path='/chats' component={Content} />
+					<Route exact path='/contacts' component={Content} />
+					<Route exact path='/login' component={Login} />
+					<Route exact path='/signup' component={Signup} />
+					<Route
+						exact
+						path={'/response/:status'}
+						component={ResponsePage}
+					/>
+					<Route exact path='/logout' component={Logout} />
+					<Route path='*' component={NotFound} />
 				</Switch>
 				<Footer />
 			</main>

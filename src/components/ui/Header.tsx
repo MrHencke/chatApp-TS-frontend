@@ -10,7 +10,6 @@ import { logout } from '../../store/actions/user/logout';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { RootState } from '../../store/reducers';
 
-//import { IProfile } from '../../store/models/profile';
 
 const Header = () => {
 	const dispatch = useDispatch();
