@@ -1,5 +1,5 @@
-import { IUser } from '../models/user';
-import { userAction } from '../models/userAction';
+import { IUser } from '../interfaces/IUser';
+import { userAction } from '../interfaces/userAction';
 
 namespace RootStateTypes {
 	export type UserState = IUser;

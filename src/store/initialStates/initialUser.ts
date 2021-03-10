@@ -1,11 +1,12 @@
-import { IProfile } from '../models/profile';
-import { IUser } from '../models/user';
+import { IProfile } from '../interfaces/IProfile';
+import { IUser } from '../interfaces/IUser';
 
 const initialProfile: IProfile = {
 	id: '',
 	email: '',
 	username: '',
-	name: '',
+	contacts: [{ id: '', username: 'fafa' }], //Fix
+	chats: [''],
 };
 
 const initialUser: IUser = {

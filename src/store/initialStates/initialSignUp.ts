@@ -1,9 +1,8 @@
-import ISignup from '../models/signup';
+import ISignup from '../interfaces/ISignup';
 
 const initialUser: ISignup = {
 	email: '',
 	username: '',
-	name: '',
 	password: '',
 	repeatedpassword: '',
 };

@@ -1,6 +1,6 @@
 import { LOGIN_SUCCESS, LOGIN_FAILURE } from './actionTypes';
 import * as api from '../../api';
-import ILogin from '../../models/login';
+import ILogin from '../../interfaces/ILogin';
 import { Dispatch } from 'redux';
 
 const login = (formData: ILogin, router: any) => async (dispatch: Dispatch) => {

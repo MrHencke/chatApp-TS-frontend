@@ -1,3 +1,5 @@
+import { IContact } from './IContact';
+
 enum themes {
 	LIGHT = 'light',
 	DARK = 'dark',
@@ -7,9 +9,9 @@ interface IProfile {
 	id: string;
 	email: string;
 	username: string;
-	name: string;
+	contacts: IContact[];
+	chats: string[];
 	token?: string;
-	password?: string;
 	isAdmin?: boolean;
 	themePreference?: themes;
 }

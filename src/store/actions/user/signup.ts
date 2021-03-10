@@ -1,6 +1,6 @@
 import { SIGNUP_SUCCESS, SIGNUP_FAILURE } from './actionTypes';
 import * as api from '../../api';
-import ISignup from '../../models/signup';
+import ISignup from '../../interfaces/ISignup';
 import { Dispatch } from 'redux';
 
 const signup = (formData: ISignup, router: any) => async (

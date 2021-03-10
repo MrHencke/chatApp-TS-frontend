@@ -13,7 +13,7 @@ const Home = () => {
 						{user.isLoggedIn ? (
 							<>
 								<Clock />
-								<h3>Welcome {user.profile.name}</h3>
+								<h3>Welcome {user.profile.username}</h3>
 							</>
 						) : (
 							<>

@@ -1,5 +1,5 @@
-import { IProfile } from './profile';
-import { IUser } from './user';
+import { IProfile } from './IProfile';
+import { IUser } from './IUser';
 
 type userAction = {
 	type: string;

@@ -5,10 +5,10 @@ import {
 	SIGNUP_FAILURE,
 	LOGOUT,
 } from '../actions/user/actionTypes';
-import { userAction } from '../models/userAction';
+import { userAction } from '../interfaces/userAction';
 import initialUser from '../initialStates/initialUser';
 import { Reducer } from 'redux';
-import { IUser } from '../models/user';
+import { IUser } from '../interfaces/IUser';
 
 const userReducer: Reducer<IUser, userAction> = (
 	state = initialUser,

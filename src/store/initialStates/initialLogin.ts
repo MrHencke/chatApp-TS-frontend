@@ -1,4 +1,4 @@
-import ILogin from '../models/login';
+import ILogin from '../interfaces/ILogin';
 
 const initialLogin: ILogin = {
 	email: '',

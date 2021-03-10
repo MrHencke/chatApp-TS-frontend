@@ -1,6 +1,6 @@
 import axios from 'axios';
-import ILogin from '../models/login';
-import ISignup from '../models/signup';
+import ILogin from '../interfaces/ILogin';
+import ISignup from '../interfaces/ISignup';
 import 'dotenv/config';
 
 const API = axios.create({

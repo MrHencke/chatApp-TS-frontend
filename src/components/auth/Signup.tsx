@@ -77,20 +77,6 @@ const Signup = () => {
 
 								<div className='form-label-group'>
 									<input
-										type='text'
-										id='inputName'
-										name='name'
-										className='form-control'
-										placeholder='Name'
-										required
-										onChange={handleChange}
-										autoComplete='off'
-									/>
-									<label htmlFor='inputName'>Name</label>
-								</div>
-
-								<div className='form-label-group'>
-									<input
 										type='password'
 										id='inputPassword'
 										name='password'
