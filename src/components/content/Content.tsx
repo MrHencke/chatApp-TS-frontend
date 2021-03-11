@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import Home from './Welcome/Home';
 import Contacts from './Contacts/Contacts';
-import Chat from './Chat/ChatWindow';
+import Chat from './Chat/Chat';
 import Settings from '../auth/Settings';
 import { match } from 'react-router-dom';
 import { RootState } from '../../store/reducers/';
@@ -19,11 +19,13 @@ const Content: FC<MatchProps> = ({ match }) => {
 					{currentUrl === '/' && <Home />}
 					{currentUrl === '/contacts' && <Contacts />}
 					{currentUrl === '/chats/:id' && <Chat />}
+					{currentUrl === '/chats' && <Chat />}
 					{currentUrl === '/settings' && <Settings />}
 				</>
 			) : (
 				<>
-					<NoAccess />
+					{currentUrl === '/' && <Home />}
+					{currentUrl !== '/' && <NoAccess />}
 				</>
 			)}
 		</>

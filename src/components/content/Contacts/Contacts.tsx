@@ -5,6 +5,7 @@ import { RootState } from '../../../store/reducers';
 import contactsDummies from '../../../testing/mockContacts';
 
 const Contacts = () => {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const contacts = useSelector(
 		(state: RootState) => state.user.profile.contacts
 	);

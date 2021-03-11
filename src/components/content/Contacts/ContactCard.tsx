@@ -1,9 +1,9 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { IContact } from '../../../store/interfaces/IContact';
 import '../../../assets/scss/Contact.scss';
 
-const ContactCard: React.FunctionComponent<Props> = ({ contact }) => {
+const ContactCard: React.FC<Props> = ({ contact }) => {
 	return (
 		<div className='col-sg mx-4 my-5'>
 			<div className='card rounded-lg'>
