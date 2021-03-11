@@ -4,7 +4,6 @@ import ILogin from '../../interfaces/ILogin';
 import { Dispatch } from 'redux';
 
 const login = (formData: ILogin, router: any) => async (dispatch: Dispatch) => {
-	console.log(formData);
 	await api
 		.login(formData)
 		.then((data) => {

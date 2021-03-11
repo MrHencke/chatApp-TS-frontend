@@ -18,6 +18,7 @@ const App = () => {
 					<Route exact path='/' component={Content} />
 					<Route exact path='/settings' component={Content} />
 					<Route exact path='/chats' component={Content} />
+					<Route exact path='/chats/:id' component={Content} />
 					<Route exact path='/contacts' component={Content} />
 					<Route exact path='/login' component={Login} />
 					<Route exact path='/signup' component={Signup} />

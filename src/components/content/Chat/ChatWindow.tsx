@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 
 const ChatWindow = () => {
-    return (
-        <div>
-            
-        </div>
-    )
-}
+	return (
+		<div className='container'>
+			<p> fafafafafafafaf </p>
+		</div>
+	);
+};
 
-export default ChatWindow
+export default ChatWindow;
