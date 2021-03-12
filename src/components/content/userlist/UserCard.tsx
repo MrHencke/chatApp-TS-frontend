@@ -8,7 +8,7 @@ import { addContact } from '../../../store/actions/user/addContact';
 const UserCard: React.FC<Props> = ({ user }) => {
 	const dispatch = useDispatch();
 	const self = useSelector((state: RootState) => state.user);
-	const formData = {contactID: user._id};
+	const formData = { contactID: user._id };
 	const handleAddContact = (e: FormEvent): void => {
 		e.preventDefault();
 		dispatch(addContact(formData));
@@ -16,7 +16,8 @@ const UserCard: React.FC<Props> = ({ user }) => {
 
 	return (
 		<>
-			{user._id === self.profile.id /* TODO remove users contacts */ ? null : (
+			{user._id === self.profile.id ||
+			self.profile.contacts.some((e) => e._id === user._id) ? null : (
 				<div className='col-sg mx-4 my-5'>
 					<div className='card rounded-lg'>
 						<div className='card-body text-center bg-dark text-white'>
