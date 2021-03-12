@@ -22,4 +22,10 @@ const login = (formData: ILogin) => API.post('/users/login', formData);
 const signup = (formData: ISignup) => API.post('/users/signup', formData);
 const nameChange = (formData: INameChange) => API.post('/users/changename', formData);
 
-export { login, signup, nameChange };
+const addContact = (formData: { contactID: string }) => API.post('/users/addcontact', formData);
+const removeContact = (formData: { contactID: string }) =>
+	API.post('/users/removecontact', formData);
+
+const getAllUsers = () => API.get('/users/getallusers');
+
+export { login, signup, nameChange, getAllUsers, addContact, removeContact };

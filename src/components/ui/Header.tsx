@@ -44,16 +44,11 @@ const Header = () => {
 					<span className='navbar-toggler-icon'></span>
 				</button>
 
-				<div
-					className='collapse navbar-collapse me-auto'
-					id='navbarSupportedContent'
-				>
+				<div className='collapse navbar-collapse me-auto' id='navbarSupportedContent'>
 					<ul className='navbar-nav me-auto'>
 						<li className='nav-item'>
 							<Link
-								className={`nav-link ${
-									user.isLoggedIn ? '' : 'disabled'
-								}`}
+								className={`nav-link ${user.isLoggedIn ? '' : 'disabled'}`}
 								to='/chats'
 							>
 								Chats
@@ -61,12 +56,18 @@ const Header = () => {
 						</li>
 						<li className='nav-item'>
 							<Link
-								className={`nav-link ${
-									user.isLoggedIn ? '' : 'disabled'
-								}`}
+								className={`nav-link ${user.isLoggedIn ? '' : 'disabled'}`}
 								to='/contacts'
 							>
 								Contacts
+							</Link>
+						</li>
+						<li className='nav-item'>
+							<Link
+								className={`nav-link ${user.isLoggedIn ? '' : 'disabled'}`}
+								to='/userlist'
+							>
+								All Users
 							</Link>
 						</li>
 					</ul>
@@ -95,20 +96,12 @@ const Header = () => {
 								aria-labelledby='navbarDropdown'
 							>
 								{user.isLoggedIn ? (
-									<Link
-										className='dropdown-item'
-										id='white-text'
-										to='/settings'
-									>
+									<Link className='dropdown-item' id='white-text' to='/settings'>
 										Settings
 									</Link>
 								) : null}
 
-								<Link
-									className='dropdown-item'
-									id='white-text'
-									to='404'
-								>
+								<Link className='dropdown-item' id='white-text' to='404'>
 									TODO
 								</Link>
 								<div className='dropdown-divider'></div>
@@ -123,11 +116,7 @@ const Header = () => {
 									</Link>
 								) : (
 									<>
-										<Link
-											className='dropdown-item'
-											id='white-text'
-											to='/login'
-										>
+										<Link className='dropdown-item' id='white-text' to='/login'>
 											Log In
 										</Link>
 										<Link

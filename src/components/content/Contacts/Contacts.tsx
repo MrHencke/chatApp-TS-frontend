@@ -2,22 +2,26 @@ import React from 'react';
 import ContactCard from './ContactCard';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../store/reducers';
-import contactsDummies from '../../../testing/mockContacts';
+import NoContacts from './NoContacts';
 
 const Contacts = () => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const contacts = useSelector(
-		(state: RootState) => state.user.profile.contacts
-	);
+	const contacts = useSelector((state: RootState) => state.user.profile.contacts);
 
 	return (
-		<div className='container'>
-			<div className='row my-5'>
-				{contactsDummies.map((contact) => {
-					return <ContactCard contact={contact} />; //contact={contact} pass contacts in as props later
-				})}
-			</div>
-		</div>
+		<>
+			{contacts.length > 0 ? (
+				<div className='container'>
+					<div className='row my-5'>
+						{contacts.map((contact) => {
+							return <ContactCard contact={contact} />; //contact={contact} pass contacts in as props later
+						})}
+					</div>
+				</div>
+			) : (
+				<NoContacts />
+			)}
+		</>
 	);
 };
 

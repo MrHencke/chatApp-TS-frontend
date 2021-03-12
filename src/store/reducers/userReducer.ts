@@ -6,8 +6,12 @@ import {
 	NAMECHANGE_SUCCESS,
 	NAMECHANGE_FAILURE,
 	LOGOUT,
+	ADDCONTACT_SUCCESS,
+	ADDCONTACT_FAILURE,
+	REMOVECONTACT_SUCCESS,
+	REMOVECONTACT_FAILURE,
 } from '../actions/user/actionTypes';
-import { userAction } from '../interfaces/userAction';
+import { userAction } from '../interfaces/actionInterfaces/userAction';
 import initialUser from '../initialStates/initialUser';
 import { Reducer } from 'redux';
 import { IUser } from '../interfaces/IUser';
@@ -61,6 +65,27 @@ const userReducer: Reducer<IUser, userAction> = (state = initialUser, action: us
 			};
 
 		case NAMECHANGE_FAILURE:
+			return {
+				...state,
+				error: action.payload.data.message!,
+			};
+
+		case ADDCONTACT_SUCCESS:
+			return {
+				...state,
+				profile: action.payload.data.profile,
+			};
+		case ADDCONTACT_FAILURE:
+			return {
+				...state,
+				error: action.payload.data.message!,
+			};
+		case REMOVECONTACT_SUCCESS:
+			return {
+				...state,
+				profile: action.payload.data.profile,
+			};
+		case REMOVECONTACT_FAILURE:
 			return {
 				...state,
 				error: action.payload.data.message!,

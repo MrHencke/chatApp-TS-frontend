@@ -1,5 +1,5 @@
 interface IContact {
-	id: string;
+	_id: string;
 	username: string;
 	picture?: any;
 }

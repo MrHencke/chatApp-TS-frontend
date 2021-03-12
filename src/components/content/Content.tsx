@@ -7,6 +7,7 @@ import { match } from 'react-router-dom';
 import { RootState } from '../../store/reducers/';
 import { useSelector } from 'react-redux';
 import NoAccess from './NoAccess';
+import Userlist from './userlist/Userlist';
 
 const Content: FC<MatchProps> = ({ match }) => {
 	const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
@@ -20,6 +21,7 @@ const Content: FC<MatchProps> = ({ match }) => {
 					{currentUrl === '/contacts' && <Contacts />}
 					{currentUrl === '/chats/:id' && <Chat />}
 					{currentUrl === '/chats' && <Chat />}
+					{currentUrl === '/userlist' && <Userlist />}
 					{currentUrl === '/settings' && <Settings />}
 				</>
 			) : (

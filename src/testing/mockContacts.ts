@@ -4,37 +4,37 @@ import harold from '../assets/img/harold.png';
 const dummies: IContact[] = [
 	{
 		username: 'Nils Pils',
-		id: '123123',
+		_id: '123123',
 		picture: harold,
 	},
 
 	{
 		username: 'Geir Pils',
-		id: '123321',
+		_id: '123321',
 		picture: harold,
 	},
 
 	{
 		username: 'Ole Olson',
-		id: '321123',
+		_id: '321123',
 		picture: harold,
 	},
 
 	{
 		username: 'Per Pils',
-		id: '132123',
+		_id: '132123',
 		picture: harold,
 	},
 
 	{
 		username: 'Per Person',
-		id: '112323',
+		_id: '112323',
 		picture: harold,
 	},
 
 	{
 		username: 'Atle Patle',
-		id: '111113',
+		_id: '111113',
 		picture: harold,
 	},
 ];

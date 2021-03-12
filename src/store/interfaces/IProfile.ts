@@ -11,8 +11,6 @@ interface IProfile {
 	username: string;
 	contacts: IContact[];
 	chats: string[];
-	token?: string;
-	isAdmin?: boolean;
 	themePreference?: themes;
 }
 
