@@ -1,24 +1,26 @@
 import React from 'react';
 import '../../../assets/scss/Chat.scss';
 import Input from './Input';
-import ReceiverMessage from './Messages/ReceiverMessage';
-import SenderMessage from './Messages/SenderMessage';
+import Message from './Messages/Message';
 
-const SelectedChat = () => {
+import DummyChat from '../../../testing/DummyChat';
+import { Socket } from 'socket.io-client';
+interface Props {
+	userID: string;
+	socket: Socket;
+}
+
+const SelectedChat = ({ userID, socket }: Props) => {
 	return (
 		<>
 			<div className='col-9 px-0'>
 				<div className='px-4 py-5 chat-box bg-white'>
-					<SenderMessage />
-					<ReceiverMessage />
-					<SenderMessage />
-					<ReceiverMessage />
-					<SenderMessage />
-					<ReceiverMessage />
-					<ReceiverMessage />
+					{DummyChat.map((msg) => {
+						return <Message message={msg} userID={userID} />;
+					})}
 				</div>
 
-				<Input />
+				<Input socket={socket} />
 			</div>
 		</>
 	);

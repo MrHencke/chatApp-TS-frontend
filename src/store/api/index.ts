@@ -1,11 +1,11 @@
 import axios from 'axios';
 import ILogin from '../interfaces/ILogin';
 import ISignup from '../interfaces/ISignup';
-import 'dotenv/config';
 import INameChange from '../interfaces/INameChange';
 
+const API_URL = 'http://localhost:8002/api/';
 const API = axios.create({
-	baseURL: 'http://localhost:8002/api',
+	baseURL: API_URL,
 });
 
 API.interceptors.request.use((req) => {

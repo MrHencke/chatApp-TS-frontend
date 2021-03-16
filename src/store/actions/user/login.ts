@@ -7,7 +7,6 @@ const login = (formData: ILogin, router: any) => async (dispatch: Dispatch) => {
 	await api
 		.login(formData)
 		.then((data) => {
-			console.log(data);
 			if (data) {
 				if (data.status === 200) {
 					dispatch({ type: LOGIN_SUCCESS, payload: data });

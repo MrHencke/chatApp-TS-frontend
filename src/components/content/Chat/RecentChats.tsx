@@ -1,7 +1,12 @@
+import { Socket } from 'socket.io-client';
 import '../../../assets/scss/Chat.scss';
 import RecentElement from './RecentElement';
 
-const RecentChats = () => {
+interface Props {
+	socket: Socket;
+}
+
+const RecentChats = ({ socket }: Props) => {
 	return (
 		<>
 			<div className='col-3 px-0'>
@@ -12,7 +17,7 @@ const RecentChats = () => {
 
 					<div className='messages-box'>
 						<div className='list-group rounded-0'>
-							<RecentElement />
+							<RecentElement socket={socket}/>
 						</div>
 					</div>
 				</div>

@@ -1,13 +1,34 @@
 import React, { FormEvent, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { Socket } from 'socket.io-client';
+import IMessage from '../../../store/interfaces/IMessage';
+import { RootState } from '../../../store/reducers';
 
-const Input = () => {
-	const [message, setMessage] = useState('');
+interface Props {
+	socket: Socket;
+}
+
+const newMessage = (id: string, messageBody: string): IMessage => {
+	return {
+		chat_id: '123123213213', //TODO Get chat id from somewhere
+		from_id: id,
+		content: messageBody,
+		timestamp: new Date().toLocaleTimeString('nb-NO'),
+	};
+};
+const chatID = '1231234512'; //TODO, implement actual chat ids from database
+
+const Input = ({ socket }: Props) => {
+	const userID = useSelector((state: RootState) => state.user.profile.id);
+
+	const [messageBody, setMessageBody] = useState('');
 
 	const handleInput = (e: FormEvent) => {
 		e.preventDefault();
-		//TODO dispatch to handle new message
-		console.log(message);
-		setMessage('');
+		let message = newMessage(userID, messageBody);
+		let data = { message, chatID };
+		socket.emit('chat', data);
+		setMessageBody('');
 	};
 
 	return (
@@ -16,9 +37,9 @@ const Input = () => {
 				<input
 					type='text'
 					onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-						setMessage(e.target.value)
+						setMessageBody(e.target.value)
 					}
-					value={message}
+					value={messageBody}
 					className='form-control rounded-0 border-0 py-4 bg-light'
 				/>
 				<div className='input-group-append'>

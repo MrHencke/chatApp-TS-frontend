@@ -1,11 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Socket } from 'socket.io-client';
 import PlaceholderProfileImage from '../../../testing/PlaceholderProfileImage';
 
-const RecentElement = () => {
+interface Props {
+	socket: Socket;
+}
+
+const RecentElement = ({ socket }: Props) => {
+	const joinRoom = () => {
+		socket.emit('join', '123451234');
+	};
+
 	return (
 		<Link
 			to='#'
+			onClick={joinRoom}
 			className='list-group-item list-group-item-action list-group-item-light rounded-0'
 		>
 			<div className='media'>

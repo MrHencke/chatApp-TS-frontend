@@ -5,7 +5,7 @@ const initialProfile: IProfile = {
 	id: '',
 	email: '',
 	username: '',
-	contacts: [{ _id: '', username: 'fafa' }], //Fix
+	contacts: [{ _id: '', username: '' }],
 	chats: [''],
 };
 
