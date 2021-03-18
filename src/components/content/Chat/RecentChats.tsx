@@ -1,5 +1,8 @@
+import { useSelector } from 'react-redux';
 import { Socket } from 'socket.io-client';
 import '../../../assets/scss/Chat.scss';
+import { IChat } from '../../../store/interfaces/IChat';
+import { RootState } from '../../../store/reducers';
 import RecentElement from './RecentElement';
 
 interface Props {
@@ -7,6 +10,9 @@ interface Props {
 }
 
 const RecentChats = ({ socket }: Props) => {
+	const userprofile = useSelector((state: RootState) => state.user.profile);
+	const chats = userprofile.chats;
+
 	return (
 		<>
 			<div className='col-3 px-0'>
@@ -17,7 +23,11 @@ const RecentChats = ({ socket }: Props) => {
 
 					<div className='messages-box'>
 						<div className='list-group rounded-0'>
-							<RecentElement socket={socket}/>
+							{chats !== null
+								? chats.map((chat: IChat) => {
+										return <RecentElement chat={chat} socket={socket} />;
+								  })
+								: null}
 						</div>
 					</div>
 				</div>

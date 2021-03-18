@@ -10,7 +10,7 @@ const login = (formData: ILogin, router: any) => async (dispatch: Dispatch) => {
 			if (data) {
 				if (data.status === 200) {
 					dispatch({ type: LOGIN_SUCCESS, payload: data });
-					router.push('/');
+					router.push('/response/success');
 				}
 			}
 		})

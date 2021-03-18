@@ -5,8 +5,8 @@ const initialProfile: IProfile = {
 	id: '',
 	email: '',
 	username: '',
-	contacts: [{ _id: '', username: '' }],
-	chats: [''],
+	contacts: null,
+	chats: null,
 };
 
 const initialUser: IUser = {

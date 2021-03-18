@@ -33,10 +33,7 @@ const Login = () => {
 					<div className='card card-signin my-5' id='roundedCard'>
 						<div className='card-body'>
 							<h5 className='card-title text-center'>Sign In</h5>
-							<form
-								className='form-signin'
-								onSubmit={handleSubmit}
-							>
+							<form className='form-signin' onSubmit={handleSubmit}>
 								<div className='form-label-group'>
 									<input
 										type='email'
@@ -48,9 +45,7 @@ const Login = () => {
 										autoFocus
 										onChange={handleChange}
 									/>
-									<label htmlFor='inputEmail'>
-										Email address
-									</label>
+									<label htmlFor='inputEmail'>Email address</label>
 								</div>
 
 								<div className='form-label-group'>
@@ -63,15 +58,11 @@ const Login = () => {
 										required
 										onChange={handleChange}
 									/>
-									<label htmlFor='inputPassword'>
-										Password
-									</label>
+									<label htmlFor='inputPassword'>Password</label>
 								</div>
 
 								{loginError === '' ? null : (
-									<div className='text-center mb-3'>
-										{loginError}
-									</div>
+									<div className='text-center mb-3'>{loginError}</div>
 								)}
 								<button
 									className='btn btn-lg btn-primary btn-block text-uppercase'

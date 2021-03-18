@@ -8,26 +8,28 @@ interface Props {
 	socket: Socket;
 }
 
-const newMessage = (id: string, messageBody: string): IMessage => {
+const newMessage = (id: string, messageBody: string, chatID: string): IMessage => {
 	return {
-		chat_id: '123123213213', //TODO Get chat id from somewhere
+		chat_id: chatID, //TODO Get chat id from somewhere
 		from_id: id,
 		content: messageBody,
-		timestamp: new Date().toLocaleTimeString('nb-NO'),
+		timestamp: new Date(),
 	};
 };
-const chatID = '1231234512'; //TODO, implement actual chat ids from database
 
 const Input = ({ socket }: Props) => {
 	const userID = useSelector((state: RootState) => state.user.profile.id);
-
+	const chatID = useSelector((state: RootState) => state.app.currentChat);
 	const [messageBody, setMessageBody] = useState('');
 
 	const handleInput = (e: FormEvent) => {
 		e.preventDefault();
-		let message = newMessage(userID, messageBody);
-		let data = { message, chatID };
-		socket.emit('chat', data);
+		if (chatID !== null) {
+			let message = newMessage(userID, messageBody, chatID);
+			socket.emit('newChatMessage', message);
+		} else {
+			console.log('There was no chat id provided to this chat');
+		}
 		setMessageBody('');
 	};
 

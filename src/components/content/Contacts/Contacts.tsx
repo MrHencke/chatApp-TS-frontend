@@ -10,7 +10,7 @@ const Contacts = () => {
 
 	return (
 		<>
-			{contacts.length > 0 && contacts ? (
+			{contacts !== null && contacts.length > 0 ? (
 				<div className='container'>
 					<div className='row my-5'>
 						{contacts.map((contact) => {

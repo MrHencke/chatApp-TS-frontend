@@ -1,32 +1,23 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import OtherChats from './RecentChats';
 import SelectedChat from './SelectedChat';
 import '../../../assets/scss/Chat.scss';
-import { useSelector } from 'react-redux';
-import { io } from 'socket.io-client';
+import { useDispatch, useSelector } from 'react-redux';
+import { Socket } from 'socket.io-client';
 import { RootState } from '../../../store/reducers';
+import IMessage from '../../../store/interfaces/IMessage';
 
 const ChatWindow = () => {
 	const user = useSelector((state: RootState) => state.user);
-	const socketurl = 'http://localhost:8002';
+	const dispatch = useDispatch();
 
-	const socket = io(socketurl, {
-		path: '/socket',
-		auth: {
-			token: user.token,
-		},
-		autoConnect: false,
-	});
+	//@ts-ignore
+	const socket: Socket = useSelector((state: RootState) => state.app.socket);
 
-	useEffect(() => {
-		socket.connect();
-		return () => {
-			socket.disconnect();
-		};
-	});
-
-	socket.on('status', (msg) => {
-		console.log(msg);
+	socket.on('status', (message: string) => console.log(message));
+	socket.on('message', (message: IMessage) => messageFunc(message));
+	socket.on('newChatMessageReturn', (msg) => {
+		//dispatch(newMessageInChat(msg))
 	});
 
 	return (
@@ -40,3 +31,7 @@ const ChatWindow = () => {
 };
 
 export default ChatWindow;
+
+const messageFunc = (message: IMessage) => {
+	console.log(message.content);
+};

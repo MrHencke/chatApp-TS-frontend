@@ -9,6 +9,7 @@ import { logout } from '../../store/actions/user/logout';
 //@ts-ignore
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { RootState } from '../../store/reducers';
+import { socketDisconnect } from '../../store/actions/app/socketDisconnect';
 
 const Header = () => {
 	const dispatch = useDispatch();
@@ -17,6 +18,7 @@ const Header = () => {
 
 	const logOut = (): void => {
 		dispatch(logout(history));
+		dispatch(socketDisconnect());
 	};
 
 	return (
