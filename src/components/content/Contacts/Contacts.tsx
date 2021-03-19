@@ -6,7 +6,7 @@ import NoContacts from './NoContacts';
 
 const Contacts = () => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const contacts = useSelector((state: RootState) => state.user.profile.contacts);
+	const contacts = useSelector((state: RootState) => state.user.contacts);
 
 	return (
 		<>

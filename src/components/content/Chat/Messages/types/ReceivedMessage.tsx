@@ -6,8 +6,8 @@ import PlaceholderProfileImage from '../../../../../testing/PlaceholderProfileIm
 interface Props {
 	message: IMessage;
 }
-
-const ReceiverMessage = ({ message }: Props) => {
+/** Message received by user from another user */
+const ReceivedMessage = ({ message }: Props) => {
 	return (
 		<div className='media w-50 ml-auto mb-3'>
 			<div className='media-body mr-3'>
@@ -21,4 +21,4 @@ const ReceiverMessage = ({ message }: Props) => {
 	);
 };
 
-export default ReceiverMessage;
+export default ReceivedMessage;

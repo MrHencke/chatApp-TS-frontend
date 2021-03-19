@@ -10,6 +10,7 @@ const newSocket = (history: any) => async (dispatch: Dispatch) => {
 			socket: socketInit(),
 		},
 	};
+	console.log('Socketinit blir dispatchet');
 	dispatch({ type: NEWSOCKET, payload });
 	history.push('/');
 };
@@ -24,8 +25,9 @@ const socketInit = (): Socket => {
 		},
 		autoConnect: false,
 	});
-
+	console.log('Socketinit blir connected');
 	socket.connect();
+	console.log('Socketinit er connected');
 
 	return socket;
 };

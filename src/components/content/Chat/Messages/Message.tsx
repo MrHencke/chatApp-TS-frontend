@@ -1,6 +1,6 @@
 import IMessage from '../../../../store/interfaces/IMessage';
-import ReceiverMessage from './types/ReceiverMessage';
-import SenderMessage from './types/SenderMessage';
+import ReceivedMessage from './types/ReceivedMessage';
+import SentMessage from './types/SentMessage';
 
 interface Props {
 	userID: string;
@@ -11,9 +11,9 @@ const Message = ({ userID, message }: Props) => {
 	return (
 		<>
 			{userID === message.from_id ? (
-				<SenderMessage message={message} />
+				<ReceivedMessage message={message} />
 			) : (
-				<ReceiverMessage message={message} />
+				<SentMessage message={message} />
 			)}
 		</>
 	);

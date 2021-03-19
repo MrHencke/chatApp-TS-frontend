@@ -5,12 +5,12 @@ const initialProfile: IProfile = {
 	id: '',
 	email: '',
 	username: '',
-	contacts: null,
-	chats: null,
 };
 
 const initialUser: IUser = {
 	profile: initialProfile,
+	contacts: null,
+	chats: null,
 	isLoggedIn: false,
 	token: '',
 	loading: false,

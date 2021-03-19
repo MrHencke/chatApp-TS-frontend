@@ -17,8 +17,7 @@ const UserCard: React.FC<Props> = ({ user }) => {
 	return (
 		<>
 			{user._id === self.profile.id ||
-			(self.profile.contacts !== null &&
-				self.profile.contacts.some((e) => e._id === user._id)) ? null : (
+			(self.contacts !== null && self.contacts.some((e) => e._id === user._id)) ? null : (
 				<div className='col-sg mx-4 my-5'>
 					<div className='card rounded-lg'>
 						<div className='card-body text-center bg-dark text-white'>

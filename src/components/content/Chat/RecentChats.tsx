@@ -10,8 +10,8 @@ interface Props {
 }
 
 const RecentChats = ({ socket }: Props) => {
-	const userprofile = useSelector((state: RootState) => state.user.profile);
-	const chats = userprofile.chats;
+	const user = useSelector((state: RootState) => state.user);
+	const chats = user.chats;
 
 	return (
 		<>

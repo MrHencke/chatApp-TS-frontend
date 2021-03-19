@@ -7,7 +7,8 @@ interface Props {
 	message: IMessage;
 }
 
-const SenderMessage = ({ message }: Props) => {
+/** Message sent by user to another user */
+const SentMessage = ({ message }: Props) => {
 	return (
 		<div className='media w-50 mb-3'>
 			<PlaceholderProfileImage />
@@ -21,4 +22,4 @@ const SenderMessage = ({ message }: Props) => {
 	);
 };
 
-export default SenderMessage;
+export default SentMessage;

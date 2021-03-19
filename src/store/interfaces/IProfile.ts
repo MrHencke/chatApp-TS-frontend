@@ -10,8 +10,6 @@ interface IProfile {
 	id: string;
 	email: string;
 	username: string;
-	contacts: IContact[] | null;
-	chats: IChat[] | null;
 	themePreference?: themes;
 }
 

@@ -10,6 +10,7 @@ interface Props {
 
 const newMessage = (id: string, messageBody: string, chatID: string): IMessage => {
 	return {
+		_id: 'Placeholder',
 		chat_id: chatID, //TODO Get chat id from somewhere
 		from_id: id,
 		content: messageBody,
@@ -24,7 +25,7 @@ const Input = ({ socket }: Props) => {
 
 	const handleInput = (e: FormEvent) => {
 		e.preventDefault();
-		if (chatID !== null) {
+		if (chatID !== null && messageBody !== '') {
 			let message = newMessage(userID, messageBody, chatID);
 			socket.emit('newChatMessage', message);
 		} else {
