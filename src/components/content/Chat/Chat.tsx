@@ -11,10 +11,6 @@ const Chat = () => {
 	//@ts-ignore
 	const socket: Socket = useSelector((state: RootState) => state.app.socket);
 
-	socket.on('newChatMessageReturn', (msg: IMessage) => {
-		console.log(msg);
-		dispatch(newMessageInChat(msg));
-	});
 	/*TODO keep every socket.on in a useeffect with cleanup */
 	useEffect(() => {
 		socket.on('newChatMessageReturn', (msg: IMessage) => {
@@ -33,7 +29,3 @@ const Chat = () => {
 };
 
 export default Chat;
-
-const messageFunc = (message: IMessage) => {
-	console.log(message.content);
-};

@@ -17,12 +17,8 @@ const Home = () => {
 							</>
 						) : (
 							<>
-								<Clock />
-								<h3>Placeholder</h3>
-								<h3>Placeholder</h3>
-								<h3>Placeholder</h3>
-								<h3>Placeholder</h3>
-								<h3>Placeholder</h3>
+							<h3>Welcome to The Chat App!</h3>
+							<h4>Register in the top right corner to start chatting!</h4>
 							</>
 						)}
 					</span>

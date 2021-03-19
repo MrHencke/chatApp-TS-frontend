@@ -1,7 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-import socketurl from '../../socket';
 import { newSocket } from '../../store/actions/app/newSocket';
 
 const ResponsePage = () => {

@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Socket } from 'socket.io-client';
 import '../../../assets/scss/Chat.scss';
 import { IChat } from '../../../store/interfaces/IChat';
 import { RootState } from '../../../store/reducers';
+import NewChatModal from './NewChatModal';
 import RecentElement from './RecentElement';
 
 interface Props {
@@ -29,6 +31,9 @@ const RecentChats = ({ socket }: Props) => {
 								  })
 								: null}
 						</div>
+					</div>
+					<div className='bg-gray px-3 py-2 bg-light'>
+						<NewChatModal />
 					</div>
 				</div>
 			</div>

@@ -12,12 +12,10 @@ import {
 	REMOVECONTACT_FAILURE,
 	NEWMESSAGEINCHAT,
 } from '../actions/user/actionTypes';
-import update from 'immutability-helper';
 import { userAction } from '../interfaces/actionInterfaces/userAction';
 import initialUser from '../initialStates/initialUser';
 import { Reducer } from 'redux';
 import { IUser } from '../interfaces/IUser';
-import { MessageSharp } from '@material-ui/icons';
 const userReducer: Reducer<IUser, userAction> = (state = initialUser, action: userAction) => {
 	switch (action.type) {
 		case LOGIN_SUCCESS:
