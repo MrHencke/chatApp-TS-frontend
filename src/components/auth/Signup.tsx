@@ -8,20 +8,31 @@ import { RootState } from '../../store/reducers';
 
 const Signup = () => {
 	const history = useHistory();
-	const signUpError = useSelector((state: RootState) => state.user.error);
-
 	const dispatch = useDispatch();
 
+	const signUpError = useSelector((state: RootState) => state.user.error);
+
 	const [form, setForm] = useState(initialForm);
+	const [file, setFile] = useState<File>();
 	const [passwordsMatch, setPasswordsMatch] = useState(true);
 
 	const handleSubmit = (e: FormEvent) => {
 		e.preventDefault();
+		const data = new FormData(); /**Had to use FormData type for image transfer */
 		if (form.password !== form.repeatedpassword) {
 			setPasswordsMatch(false);
 			return;
 		} else {
-			dispatch(signup(form, history));
+			if (file) {
+				data.append('email', form.email);
+				data.append('username', form.username);
+				data.append('password', form.password);
+				data.append('repeatedpassword', form.repeatedpassword);
+				data.append('profilepic', file);
+				dispatch(signup(data, history));
+			} else {
+				dispatch(signup(form, history));
+			}
 		}
 	};
 
@@ -32,6 +43,7 @@ const Signup = () => {
 			setForm({ ...form, [e.target.name]: e.target.value });
 		}
 	};
+
 	return (
 		<div className='container'>
 			<div className='row'>
@@ -42,6 +54,7 @@ const Signup = () => {
 							<form
 								className='form-signin'
 								onSubmit={handleSubmit}
+								encType='multipart/form-data'
 							>
 								<div className='form-label-group'>
 									<input
@@ -54,9 +67,7 @@ const Signup = () => {
 										autoFocus
 										onChange={handleChange}
 									/>
-									<label htmlFor='inputEmail'>
-										Email address
-									</label>
+									<label htmlFor='inputEmail'>Email address</label>
 								</div>
 
 								<div className='form-label-group'>
@@ -70,9 +81,7 @@ const Signup = () => {
 										onChange={handleChange}
 										autoComplete='off'
 									/>
-									<label htmlFor='inputUsername'>
-										Username
-									</label>
+									<label htmlFor='inputUsername'>Username</label>
 								</div>
 
 								<div className='form-label-group'>
@@ -85,9 +94,7 @@ const Signup = () => {
 										required
 										onChange={handleChange}
 									/>
-									<label htmlFor='inputPassword'>
-										Password
-									</label>
+									<label htmlFor='inputPassword'>Password</label>
 								</div>
 
 								<div className='form-label-group'>
@@ -100,19 +107,27 @@ const Signup = () => {
 										required
 										onChange={handleChange}
 									/>
-									<label htmlFor='inputRepeatPassword'>
-										Repeat Password
-									</label>
+									<label htmlFor='inputRepeatPassword'>Repeat Password</label>
+								</div>
+
+								<div className='form-label-group'>
+									<input
+										type='file'
+										id='profilePicture'
+										name='profilePicture'
+										className='form-control'
+										placeholder='Profile Picture'
+										onChange={(e) => {
+											if (e.target.files) setFile(e.target.files[0]);
+										}}
+									/>
+									<label htmlFor='profilePicture'>Profile Picture</label>
 								</div>
 								{passwordsMatch ? null : (
-									<div className='text-center mb-3'>
-										Passwords must match
-									</div>
+									<div className='text-center mb-3'>Passwords must match</div>
 								)}
 								{signUpError === '' ? null : (
-									<div className='text-center mb-3'>
-										{signUpError}
-									</div>
+									<div className='text-center mb-3'>{signUpError}</div>
 								)}
 
 								<button

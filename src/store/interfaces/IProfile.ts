@@ -1,5 +1,3 @@
-import { IChat } from './IChat';
-import { IContact } from './IContact';
 
 enum themes {
 	LIGHT = 'light',
@@ -10,6 +8,7 @@ interface IProfile {
 	id: string;
 	email: string;
 	username: string;
+	profilepicture: string;
 	themePreference?: themes;
 }
 

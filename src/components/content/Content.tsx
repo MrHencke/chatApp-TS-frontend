@@ -8,6 +8,7 @@ import { RootState } from '../../store/reducers/';
 import { useSelector } from 'react-redux';
 import NoAccess from './NoAccess';
 import Userlist from './userlist/Userlist';
+import SocketIOFunctionality from '../../socket/SocketIOFunctionality';
 
 const Content: FC<MatchProps> = ({ match }) => {
 	const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
@@ -16,7 +17,7 @@ const Content: FC<MatchProps> = ({ match }) => {
 		<>
 			{isLoggedIn ? (
 				<>
-					{' '}
+					<SocketIOFunctionality />
 					{currentUrl === '/' && <Home />}
 					{currentUrl === '/contacts' && <Contacts />}
 					{currentUrl === '/chats/:id' && <Chat />}

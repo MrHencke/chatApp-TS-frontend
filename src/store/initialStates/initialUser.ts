@@ -1,10 +1,12 @@
-import { IProfile } from '../interfaces/IProfile';
+import { IProfile, themes } from '../interfaces/IProfile';
 import { IUser } from '../interfaces/IUser';
 
 const initialProfile: IProfile = {
 	id: '',
 	email: '',
 	username: '',
+	profilepicture: '',
+	themePreference: themes.LIGHT,
 };
 
 const initialUser: IUser = {

@@ -1,5 +1,4 @@
 import React, { FormEvent } from 'react';
-import { Link } from 'react-router-dom';
 import { IContact } from '../../../store/interfaces/IContact';
 import '../../../assets/scss/Contact.scss';
 import { removeContact } from '../../../store/actions/user/removeContact';
@@ -14,15 +13,21 @@ const ContactCard: React.FC<Props> = ({ contact }) => {
 	};
 
 	return (
-		<div className='col-sg mx-4 my-5'>
-			<div className='card rounded-lg'>
-				<img className='card-img-top' src={contact.picture} alt='' />
-				<div className='card-body text-center bg-dark text-white'>
+		<div className='col-sg mx-4 my-5 w-25' id='roundedcard'>
+			<div className='card rounded-lg '>
+				<div className='card-body text-center bg-light'>
+					<img
+						className=''
+						width='100'
+						height='100'
+						src={contact.profilepicture}
+						alt=''
+					/>
 					<h5 className='card-title'>{contact.username}</h5>
 					<p className='card-text'>Testing</p>
-					<Link to={`/chats/${contact._id}`} className='btn btn-primary'>
+					{/*<Link to={`/chats/${contact._id}`} className='btn btn-primary'>
 						Go to chat
-					</Link>
+	</Link>*/}
 					<hr />
 					<form onSubmit={handleRemoveContact}>
 						<button className='btn btn-primary' type='submit'>

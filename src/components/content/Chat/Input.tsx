@@ -35,7 +35,7 @@ const Input = ({ socket }: Props) => {
 	};
 
 	return (
-		<form onSubmit={handleInput} className='bg-light'>
+		<form onSubmit={handleInput} className='bg-light py-2'>
 			<div className='input-group'>
 				<input
 					type='text'
@@ -43,7 +43,7 @@ const Input = ({ socket }: Props) => {
 						setMessageBody(e.target.value)
 					}
 					value={messageBody}
-					className='form-control rounded-0 border-0 py-4 bg-light'
+					className='form-control rounded-0 border-0 bg-light'
 				/>
 				<div className='input-group-append'>
 					<button type='submit' className='btn'>

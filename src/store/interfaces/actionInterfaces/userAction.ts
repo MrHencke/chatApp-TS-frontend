@@ -7,6 +7,7 @@ type userAction = {
 	payload: {
 		data: IUser;
 		newMessage?: IMessage;
+		newChat?: IChat;
 	};
 };
 

@@ -19,7 +19,7 @@ API.interceptors.request.use((req) => {
 });
 
 const login = (formData: ILogin) => API.post('/users/login', formData);
-const signup = (formData: ISignup) => API.post('/users/signup', formData);
+const signup = (formData: ISignup | FormData) => API.post('/users/signup', formData);
 const nameChange = (formData: INameChange) => API.patch('/users/changename', formData);
 
 const addContact = (formData: { contactID: string }) => API.patch('/users/addcontact', formData);

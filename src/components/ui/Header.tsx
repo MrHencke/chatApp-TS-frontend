@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -6,8 +5,6 @@ import logo from '../../assets/img/logo.png';
 import '../../assets/scss/Header.scss';
 import { logout } from '../../store/actions/user/logout';
 
-//@ts-ignore
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { RootState } from '../../store/reducers';
 import { socketDisconnect } from '../../store/actions/app/socketDisconnect';
 
@@ -37,8 +34,8 @@ const Header = () => {
 				<button
 					className='navbar-toggler'
 					type='button'
-					data-bs-toggle='collapse'
-					data-bs-target='#navbarSupportedContent'
+					data-toggle='collapse'
+					data-target='#navbarSupportedContent'
 					aria-controls='navbarSupportedContent'
 					aria-expanded='false'
 					aria-label='Toggle navigation'
@@ -80,16 +77,33 @@ const Header = () => {
 								to='#'
 								id='navbarDropdown'
 								role='button'
-								data-bs-toggle='dropdown'
+								data-toggle='dropdown'
 								aria-haspopup='true'
 								aria-expanded='false'
 							>
 								{user.isLoggedIn ? (
-									<>{user.profile.username + '  '}</>
+									<>
+										{user.profile.username + '  '}
+										<img
+											src={user.profile.profilepicture}
+											width='30'
+											height='30'
+											alt=''
+											style={{ borderRadius: '50%' }}
+										/>
+									</>
 								) : (
-									<>Welcome </>
-								)}{' '}
-								<AccountCircleIcon />
+									<>
+										{'Welcome '}
+										<img
+											src='https://res.cloudinary.com/mrhencke/image/upload/v1616254670/profilePictures/NOAVATAR_uwpx2v.jpg'
+											width='30'
+											height='30'
+											alt=''
+											style={{ borderRadius: '50%' }}
+										/>
+									</>
+								)}
 							</Link>
 
 							<div

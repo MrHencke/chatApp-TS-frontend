@@ -1,11 +1,10 @@
 import moment from 'moment';
-import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Socket } from 'socket.io-client';
 import { changeCurrentChat } from '../../../store/actions/app/changeCurrentChat';
 import { IChat } from '../../../store/interfaces/IChat';
-import PlaceholderProfileImage from '../../../testing/PlaceholderProfileImage';
+import TimeStamp from './TimeStamp';
 
 interface Props {
 	socket: Socket;
@@ -24,54 +23,60 @@ const RecentElement = ({ socket, chat }: Props) => {
 				<Link
 					to='#'
 					onClick={joinRoom}
-					className='list-group-item list-group-item-action list-group-item-light rounded-0'
+					className='list-group-item list-group-item-action list-group-item-light overflow-hidden'
 				>
 					<div className='media'>
-						<PlaceholderProfileImage />
+						<img
+							src='https://res.cloudinary.com/mrhencke/image/upload/v1616254670/profilePictures/NOAVATAR_uwpx2v.jpg'
+							alt=''
+							width='50'
+							height='50'
+							style={{borderRadius: "100%"}}
+						/>
 						<div className='media-body ml-4'>
-							<div className='d-flex align-items-center justify-content-between mb-1'>
-								<h6 className='mb-0'>
-									{
-										chat.name.split(
-											' '
-										)[0] /* TODO change to a group name/chat name*/
-									}
+							<div className='d-inline-block align-items-center justify-content-between mb-1'>
+								<h6 className='mb-0 text-truncate' style={{ width: '6rem' }}>
+									{chat.name}
 								</h6>
-								<small className='small font-weight-bold'>
-									{moment(
-										chat.messages[chat.messages.length - 1].timestamp
-									).format('HH:mm, DD/MM')}
-									{/* TODO fix timestamp later */}
-								</small>
 							</div>
-							<p className='font-italic mb-0 text-small'>
+							<p
+								className='font-italic mb-0 text-small text-truncate'
+								style={{ width: '7rem' }}
+							>
 								{chat.messages[chat.messages.length - 1].content}
 							</p>
-						</div>
+						</div>{' '}
+						<small className='px-2 font-weight-bold'>
+							<TimeStamp
+								timestamp={moment(
+									chat.messages[chat.messages.length - 1].timestamp
+								)}
+							/>
+						</small>
 					</div>
 				</Link>
 			) : (
 				<Link
 					to='#'
 					onClick={joinRoom}
-					className='list-group-item list-group-item-action list-group-item-light rounded-0'
+					className='list-group-item list-group-item-action list-group-item-light overflow-hidden'
 				>
 					<div className='media'>
-						<PlaceholderProfileImage />
+					<img
+							src='https://res.cloudinary.com/mrhencke/image/upload/v1616254670/profilePictures/NOAVATAR_uwpx2v.jpg'
+							alt=''
+							width='50'
+							height='50'
+							style={{borderRadius: "100%"}}
+						/>
 						<div className='media-body ml-4'>
 							<div className='d-flex align-items-center justify-content-between mb-1'>
-								<h6 className='mb-0'>
-									{
-										chat.name.split(
-											' '
-										)[0] /* TODO change to a group name/chat name*/
-									}
+								<h6 className='mb-0 text-truncate' style={{ width: '6rem' }}>
+									{chat.name}
 								</h6>
 								<small className='small font-weight-bold'></small>
 							</div>
-							<p className='font-italic mb-0 text-small'>
-								New Chat, click to start chatting!
-							</p>
+							<p className='font-italic mb-0 text-small'>No messages in chat.</p>
 						</div>
 					</div>
 				</Link>

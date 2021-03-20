@@ -1,22 +1,28 @@
 import moment from 'moment';
-import React from 'react';
 import IMessage from '../../../../../store/interfaces/IMessage';
-import PlaceholderProfileImage from '../../../../../testing/PlaceholderProfileImage';
+import TimeStamp from '../../TimeStamp';
 
 interface Props {
 	message: IMessage;
+	authorName: string;
+	authorPicture: string;
 }
 
 /** Message sent by user to another user */
-const SentMessage = ({ message }: Props) => {
+const SentMessage = ({ message, authorName, authorPicture }: Props) => {
 	return (
 		<div className='media w-50 mb-3'>
-			<PlaceholderProfileImage />
+			<img src={authorPicture} alt='' width='50' height='50' />
 			<div className='media-body ml-3'>
-				<div className='bg-light rounded py-2 px-3 mb-2'>
-					<p className='text-small mb-0 text-muted'>{message.content}</p>
+				<div className='bg-light rounded py-2 px-3 mb-2 text-break'>
+					<p className='text-small mb-0 text-muted text-break'>{message.content}</p>
 				</div>
-				<p className='small text-muted'>{moment(message.timestamp).format('HH:mm')}</p>
+				<div className='small text-muted d-flex w-100'>
+					<p className='w-50'>{authorName}</p>
+					<p className='w-50 ml-auto text-right'>
+						<TimeStamp timestamp={moment(message.timestamp)} />
+					</p>
+				</div>
 			</div>
 		</div>
 	);

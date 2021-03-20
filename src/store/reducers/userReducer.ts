@@ -11,6 +11,7 @@ import {
 	REMOVECONTACT_SUCCESS,
 	REMOVECONTACT_FAILURE,
 	NEWMESSAGEINCHAT,
+	NEWCHAT,
 } from '../actions/user/actionTypes';
 import { userAction } from '../interfaces/actionInterfaces/userAction';
 import initialUser from '../initialStates/initialUser';
@@ -106,7 +107,12 @@ const userReducer: Reducer<IUser, userAction> = (state = initialUser, action: us
 			state.chats![indexOfChat].messages.push(action.payload.newMessage!);
 			return {
 				...state,
-				//chats: state.chats,
+			};
+
+		case NEWCHAT:
+			state.chats!.push(action.payload.newChat!);
+			return {
+				...state,
 			};
 
 		default:

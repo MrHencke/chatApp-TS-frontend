@@ -3,13 +3,19 @@ import { RootState } from '../../../store/reducers';
 import { Modal } from 'react-bootstrap';
 import Select, { ValueType } from 'react-select';
 import { FormEvent, useState } from 'react';
-const NewChatModal = () => {
+
+interface Props {
+	chatname: string;
+}
+
+const ChatSettingsModal = ({ chatname }: Props) => {
 	const user = useSelector((state: RootState) => state.user);
-	const socket = useSelector((state: RootState) => state.app.socket);
+	//const socket = useSelector((state: RootState) => state.app.socket);
 	const [chatName, setChatName] = useState('');
 	const [members, setMembers] = useState<ValueType<OptionsType, true>>([]);
 
 	type OptionsType = { label: string; value: string };
+
 	let contactOptions: OptionsType[] = [];
 	if (user.contacts) {
 		user.contacts.forEach((contact) => {
@@ -25,53 +31,58 @@ const NewChatModal = () => {
 		setChatName(e.target.value);
 	};
 
-	const handleSubmit = (e: FormEvent) => {
-		e.preventDefault();
-		const creatorID = user.profile.id;
-		const _members = members.map((user) => user.value);
-		const data = { name: chatName, creatorID, members: _members };
-		socket!.emit('newChat', data);
-		setChatName('');
-		setMembers([]);
-		setShowHide(!showHide);
-	};
+	const handleSubmit = (e: FormEvent) => {};
 
 	const [showHide, setShowHide] = useState(false);
 
 	return (
 		<>
 			<button
-				type='button'
-				className='btn btn-default btn-block'
+				className='dropdown-item'
 				onClick={() => {
 					setShowHide(!showHide);
 				}}
 			>
-				New Chat
+				Chat Settings
 			</button>
-
+			{/*TODO Maybe make content of modal an accordion */}
 			<Modal
 				show={showHide}
 				onHide={() => {
 					setShowHide(!showHide);
 				}}
 				centered
+				id='roundedCard'
 			>
-				<Modal.Header closeButton onClick={() => setShowHide(!showHide)}>
-					<Modal.Title>Create New Chat</Modal.Title>
+				<Modal.Header className='' closeButton onClick={() => setShowHide(!showHide)}>
+					<Modal.Title>Settings for {chatname}</Modal.Title>
 				</Modal.Header>
 				<form onSubmit={handleSubmit} className='form'>
 					<Modal.Body>
 						<div className='modal-body'>
-							<h5>Chat Name</h5>
+							<h5>Rename Chat</h5>
+							{/* TODO Write logic for renaming chat */}
 							<input
 								type='text'
 								value={chatName}
 								className='form-control'
 								minLength={5}
 								onChange={handleChangeName}
+								placeholder='New Chat name'
 							/>
-							<h5 className='pt-5'>Chat Members</h5>
+							<h5 className='pt-5'>Add Chat Members</h5>
+							{/* TODO find contacts not present in chat, present by name */}
+							<Select
+								options={contactOptions}
+								isSearchable
+								isMulti
+								onChange={(options) => handleChangeMembers(options)}
+								className='select-search-box'
+								placeholder='Search'
+								value={members}
+							/>
+							<h5 className='pt-5'>Remove Chat Members</h5>
+							{/* TODO find members of chat, present by name */}
 							<Select
 								options={contactOptions}
 								isSearchable
@@ -88,10 +99,10 @@ const NewChatModal = () => {
 						<button
 							className='btn btn-lg btn-primary btn-block'
 							type='submit'
-							disabled={members.length === 0}
+							disabled={false /* TODO New requirement for disabling button */}
 							onClick={handleSubmit}
 						>
-							Start new Chat
+							Save Changes
 						</button>
 					</Modal.Footer>
 				</form>
@@ -100,4 +111,4 @@ const NewChatModal = () => {
 	);
 };
 
-export default NewChatModal;
+export default ChatSettingsModal;

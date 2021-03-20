@@ -18,9 +18,10 @@ const UserCard: React.FC<Props> = ({ user }) => {
 		<>
 			{user._id === self.profile.id ||
 			(self.contacts !== null && self.contacts.some((e) => e._id === user._id)) ? null : (
-				<div className='col-sg mx-4 my-5'>
+				<div className='col-sg mx-4 my-5 w-25'>
 					<div className='card rounded-lg'>
-						<div className='card-body text-center bg-dark text-white'>
+						<div className='card-body text-center bg-light'>
+							<img className='' width="100" height="100" src={user.profilepicture} alt='' />
 							<h5 className='card-title'>{user.username}</h5>
 							<p className='card-text'></p>
 							<form onSubmit={handleAddContact}>

@@ -1,7 +1,7 @@
 interface IContact {
 	_id: string;
 	username: string;
-	picture?: any;
+	profilepicture: string;
 }
 
 export type { IContact };

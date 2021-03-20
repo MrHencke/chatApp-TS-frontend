@@ -2,7 +2,7 @@ interface ISignup {
 	email: string;
 	username: string;
 	password: string;
-	repeatedpassword: String;
+	repeatedpassword: string;
 }
 
 export default ISignup;
