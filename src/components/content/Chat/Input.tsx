@@ -19,19 +19,47 @@ const newMessage = (id: string, messageBody: string, chatID: string): IMessage =
 };
 
 const Input = ({ socket }: Props) => {
-	const userID = useSelector((state: RootState) => state.user.profile.id);
+	const profile = useSelector((state: RootState) => state.user.profile);
+	const userID = profile.id;
+	const username = profile.username;
 	const chatID = useSelector((state: RootState) => state.app.currentChat);
 	const [messageBody, setMessageBody] = useState('');
+	const [typing, setTyping] = useState(false);
 
 	const handleInput = (e: FormEvent) => {
 		e.preventDefault();
 		if (chatID !== null && messageBody !== '') {
 			let message = newMessage(userID, messageBody, chatID);
 			socket.emit('newChatMessage', message);
+			socket.emit('stoppedTyping', data);
 		} else {
-			console.log('There was no chat id provided to this chat');
+			console.log('When sending a message, it helps to write something.');
 		}
 		setMessageBody('');
+	};
+
+	let timeout: any;
+	const data = { chatID, username };
+
+	const timeoutFunction = () => {
+		setTyping(false);
+		if (typing === false) socket.emit('stoppedTyping', data);
+	};
+
+	const userIsTyping = () => {
+		if (typing === false) {
+			setTyping(true);
+			socket.emit('typingMessage', data);
+			timeout = setTimeout(timeoutFunction, 4000);
+		} else {
+			clearTimeout(timeout);
+			timeout = setTimeout(timeoutFunction, 4000);
+		}
+	};
+
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setMessageBody(e.target.value);
+		userIsTyping();
 	};
 
 	return (
@@ -39,11 +67,9 @@ const Input = ({ socket }: Props) => {
 			<div className='input-group'>
 				<input
 					type='text'
-					onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-						setMessageBody(e.target.value)
-					}
+					onChange={(e) => handleChange(e)}
 					value={messageBody}
-					className='form-control rounded-0 border-0 bg-light'
+					className='form-control rounded-0 border-1 bg-light'
 				/>
 				<div className='input-group-append'>
 					<button type='submit' className='btn'>

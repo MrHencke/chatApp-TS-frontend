@@ -6,6 +6,8 @@ import { useEffect } from 'react';
 import { IChat } from '../store/interfaces/IChat';
 import { Socket } from 'socket.io-client';
 import { newChat } from '../store/actions/user/newChat';
+import { typingMessage } from '../store/actions/user/typingMessage';
+import { stoppedTyping } from '../store/actions/user/stoppedTyping';
 
 const SocketIOFunctionality = () => {
 	const dispatch = useDispatch();
@@ -38,7 +40,6 @@ const SocketIOFunctionality = () => {
 		};
 	});
 
-
 	useEffect(() => {
 		if (chats) {
 			chats.forEach((chat: IChat) => {
@@ -46,6 +47,26 @@ const SocketIOFunctionality = () => {
 			});
 		}
 	}, [chats, socket]);
+
+	useEffect(() => {
+		socket.on('isTypingReturn', (data) => {
+			console.log(data.username + ' Is typing');
+			dispatch(typingMessage(data));
+		});
+		return () => {
+			socket.off('isTypingReturn');
+		};
+	});
+
+	useEffect(() => {
+		socket.on('stoppedTypingReturn', (data) => {
+			console.log(data.username + ' Is typing');
+			dispatch(stoppedTyping(data));
+		});
+		return () => {
+			socket.off('stoppedTypingReturn');
+		};
+	});
 
 	return <></>;
 };

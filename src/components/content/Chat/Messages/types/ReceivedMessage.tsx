@@ -1,7 +1,7 @@
 import moment from 'moment';
 import React from 'react';
 import IMessage from '../../../../../store/interfaces/IMessage';
-import TimeStamp from '../../TimeStamp';
+import TimeStamp from '../../util/TimeStamp';
 
 interface Props {
 	message: IMessage;
@@ -23,7 +23,7 @@ const ReceivedMessage = ({ message, authorName, authorPicture }: Props) => {
 					<p className='w-50 ml-auto text-right'>{authorName}</p>
 				</div>
 			</div>
-			<img src={authorPicture} alt="" width="50" height="50"/>
+			<img src={authorPicture} alt='' width='50' height='50' />
 		</div>
 	);
 };

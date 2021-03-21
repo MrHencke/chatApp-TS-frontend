@@ -31,14 +31,16 @@ const ChatSettingsModal = ({ chatname }: Props) => {
 		setChatName(e.target.value);
 	};
 
-	const handleSubmit = (e: FormEvent) => {};
+	const handleSubmit = (e: FormEvent) => {
+		e.preventDefault();
+	};
 
 	const [showHide, setShowHide] = useState(false);
 
 	return (
 		<>
 			<button
-				className='dropdown-item'
+				className='dropdown-item rounded'
 				onClick={() => {
 					setShowHide(!showHide);
 				}}

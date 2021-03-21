@@ -46,7 +46,7 @@ const RecentChats = ({ socket }: Props) => {
 					<div className='bg-gray px-4 py-2 bg-light'>
 						<p className='h5 mb-0 py-1'>Recent Chats</p>
 					</div>
-					<div className='messages-box'>
+					<div className='messages-box '>
 						<div className='list-group rounded-0'>
 							<RenderChats />
 						</div>

@@ -2,10 +2,11 @@ import '../../../assets/scss/Chat.scss';
 import Input from './Input';
 import Message from './Messages/Message';
 import { Socket } from 'socket.io-client';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../store/reducers';
 import ChatSettingsModal from './ChatSettingsModal';
+import UserTyping from './Messages/types/UserTyping';
 interface Props {
 	socket: Socket;
 }
@@ -25,6 +26,19 @@ const SelectedChat = ({ socket }: Props) => {
 	const user = useSelector((state: RootState) => state.user);
 	//@ts-ignore
 	const chat = user.chats.find((el) => el._id === currentChat);
+	const usersTyping = chat?.isTyping;
+	const [usersTypingString, setUsersTypingString] = useState('');
+
+	const RenderTyping = () => {
+		if (usersTyping && usersTyping.length !== 0) {
+			usersTyping.length === 1
+				? setUsersTypingString(usersTyping[0])
+				: setUsersTypingString(usersTyping.join(', '));
+			return <UserTyping usersTypingString={usersTypingString} />;
+		} else {
+			return null;
+		}
+	};
 
 	const RenderChat = () => {
 		return (
@@ -44,6 +58,7 @@ const SelectedChat = ({ socket }: Props) => {
 			</>
 		);
 	};
+
 	const chatname = chat !== undefined ? chat.name : '';
 	return (
 		<>
@@ -63,17 +78,28 @@ const SelectedChat = ({ socket }: Props) => {
 							</button>
 							<div className='dropdown-menu'>
 								<ChatSettingsModal chatname={chatname} />
-								<button className='dropdown-item btn'>Option 1</button>
-								<button className='dropdown-item btn'>Option 2</button>
-								<button className='dropdown-item btn'>Option 3</button>
+								<div className='dropdown-divider'></div>
+								<button className='dropdown-item rounded'>
+									Leave Chat {/* TODO */}
+								</button>
+								{user.profile.id === chat?.owner ? (
+									<>
+										<div className='dropdown-divider'></div>
+										<button className='dropdown-item rounded'>
+											Delete Chat {/* TODO */}
+										</button>
+									</>
+								) : null}
 							</div>
 						</div>
 					</div>
 				</div>
 				<div className='px-4 pt-5 pb-0 chat-box bg-white'>
 					<RenderChat />
-					<div id='Hey stop looking at this' ref={bottomRef}></div>
+					<RenderTyping />
+					<div className='' id='Hey stop looking at this' ref={bottomRef}></div>
 				</div>
+
 				<Input socket={socket} />
 			</div>
 		</>

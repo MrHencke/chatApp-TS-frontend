@@ -12,6 +12,8 @@ import {
 	REMOVECONTACT_FAILURE,
 	NEWMESSAGEINCHAT,
 	NEWCHAT,
+	TYPINGMESSAGE,
+	STOPPEDTYPING,
 } from '../actions/user/actionTypes';
 import { userAction } from '../interfaces/actionInterfaces/userAction';
 import initialUser from '../initialStates/initialUser';
@@ -100,17 +102,43 @@ const userReducer: Reducer<IUser, userAction> = (state = initialUser, action: us
 			return { ...initialUser };
 
 		case NEWMESSAGEINCHAT:
-			let chatList = state.chats?.slice();
-			let indexOfChat: any = chatList?.findIndex(
-				(chat) => chat._id === action.payload.newMessage?.chat_id
-			);
-			state.chats![indexOfChat].messages.push(action.payload.newMessage!);
+			let indexOfChat = state.chats
+				?.slice()
+				.findIndex((chat) => chat._id === action.payload.newMessage?.chat_id);
+			state.chats![indexOfChat!].messages.push(action.payload.newMessage!);
 			return {
 				...state,
 			};
 
 		case NEWCHAT:
 			state.chats!.push(action.payload.newChat!);
+			return {
+				...state,
+			};
+
+		case STOPPEDTYPING:
+			let indexOfChat_ = state.chats
+				?.slice()
+				.findIndex((chat) => chat._id === action.payload.typingStatus?.chatID);
+			if (state.chats![indexOfChat_!].isTyping) {
+				state.chats![indexOfChat_!].isTyping = [];
+			}
+			return {
+				...state,
+			};
+
+		case TYPINGMESSAGE:
+			let _indexOfChat = state.chats
+				?.slice()
+				.findIndex((chat) => chat._id === action.payload.typingStatus?.chatID);
+			if (
+				state.chats![_indexOfChat!].isTyping?.find(
+					(name) => name === action.payload.typingStatus?.username!
+				) === undefined
+			) {
+				state.chats![_indexOfChat!].isTyping?.push(action.payload.typingStatus?.username!);
+			}
+
 			return {
 				...state,
 			};

@@ -1,6 +1,6 @@
 import moment from 'moment';
 import IMessage from '../../../../../store/interfaces/IMessage';
-import TimeStamp from '../../TimeStamp';
+import TimeStamp from '../../util/TimeStamp';
 
 interface Props {
 	message: IMessage;

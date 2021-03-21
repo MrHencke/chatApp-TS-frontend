@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Socket } from 'socket.io-client';
 import { changeCurrentChat } from '../../../store/actions/app/changeCurrentChat';
 import { IChat } from '../../../store/interfaces/IChat';
-import TimeStamp from './TimeStamp';
+import TimeStamp from './util/TimeStamp';
 
 interface Props {
 	socket: Socket;
@@ -31,7 +31,7 @@ const RecentElement = ({ socket, chat }: Props) => {
 							alt=''
 							width='50'
 							height='50'
-							style={{borderRadius: "100%"}}
+							style={{ borderRadius: '100%' }}
 						/>
 						<div className='media-body ml-4'>
 							<div className='d-inline-block align-items-center justify-content-between mb-1'>
@@ -62,12 +62,12 @@ const RecentElement = ({ socket, chat }: Props) => {
 					className='list-group-item list-group-item-action list-group-item-light overflow-hidden'
 				>
 					<div className='media'>
-					<img
+						<img
 							src='https://res.cloudinary.com/mrhencke/image/upload/v1616254670/profilePictures/NOAVATAR_uwpx2v.jpg'
 							alt=''
 							width='50'
 							height='50'
-							style={{borderRadius: "100%"}}
+							style={{ borderRadius: '100%' }}
 						/>
 						<div className='media-body ml-4'>
 							<div className='d-flex align-items-center justify-content-between mb-1'>
