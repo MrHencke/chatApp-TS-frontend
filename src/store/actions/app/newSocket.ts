@@ -1,7 +1,7 @@
 import { NEWSOCKET } from './actionTypes';
 import { Dispatch } from 'redux';
 import { io, Socket } from 'socket.io-client';
-import socketurl from '../../../socket';
+import config from '../../../config';
 import { store } from '../../../index';
 
 const newSocket = (history: any) => async (dispatch: Dispatch) => {
@@ -17,8 +17,8 @@ const newSocket = (history: any) => async (dispatch: Dispatch) => {
 export { newSocket };
 
 const socketInit = (): Socket => {
-	const socket = io(socketurl, {
-		path: '/socket',
+	const socket = io(`${config.HTTP}${config.BACKENDURL}:${config.BACKEND_PORT}`, {
+		path: config.SOCKETROUTE,
 		auth: {
 			token: store.getState().user.token,
 		},

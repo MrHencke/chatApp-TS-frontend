@@ -5,8 +5,8 @@ import { Socket } from 'socket.io-client';
 import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../store/reducers';
-import ChatSettingsModal from './ChatSettingsModal';
 import UserTyping from './Messages/types/UserTyping';
+import ChatSettings from './util/ChatSettings';
 interface Props {
 	socket: Socket;
 }
@@ -29,6 +29,14 @@ const SelectedChat = ({ socket }: Props) => {
 	const usersTyping = chat?.isTyping;
 	const [usersTypingString, setUsersTypingString] = useState('');
 
+	const handleLeave = () => {
+		if (chat) {
+			let chatID = chat!._id;
+			let memberID = user.profile.id;
+			let data = { memberID, chatID };
+			socket!.emit('removeMember', data);
+		}
+	};
 	const RenderTyping = () => {
 		if (usersTyping && usersTyping.length !== 0) {
 			usersTyping.length === 1
@@ -67,32 +75,7 @@ const SelectedChat = ({ socket }: Props) => {
 					<p className='h5 mb-0 py-1' style={{ width: '50%' }}>
 						<p className='py-1'>{chatname}</p>
 					</p>
-					<div className='ml-auto'>
-						<div className='btn-group dropleft'>
-							<button
-								type='button'
-								className='btn btn-secondary dropdown-toggle'
-								data-toggle='dropdown'
-							>
-								Chat Settings
-							</button>
-							<div className='dropdown-menu'>
-								<ChatSettingsModal chatname={chatname} />
-								<div className='dropdown-divider'></div>
-								<button className='dropdown-item rounded'>
-									Leave Chat {/* TODO */}
-								</button>
-								{user.profile.id === chat?.owner ? (
-									<>
-										<div className='dropdown-divider'></div>
-										<button className='dropdown-item rounded'>
-											Delete Chat {/* TODO */}
-										</button>
-									</>
-								) : null}
-							</div>
-						</div>
-					</div>
+					<ChatSettings chat={chat!} currentChat={currentChat} userID={user.profile.id} />
 				</div>
 				<div className='px-4 pt-5 pb-0 chat-box bg-white'>
 					<RenderChat />

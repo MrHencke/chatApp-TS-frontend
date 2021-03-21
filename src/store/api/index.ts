@@ -2,10 +2,10 @@ import axios from 'axios';
 import ILogin from '../interfaces/ILogin';
 import ISignup from '../interfaces/ISignup';
 import INameChange from '../interfaces/INameChange';
+import config from '../../config';
 
-const API_URL = 'http://localhost:8002/api/';
 const API = axios.create({
-	baseURL: API_URL,
+	baseURL: `${config.HTTP}${config.BACKENDURL}:${config.BACKEND_PORT}${config.APIROUTE}`,
 });
 
 API.interceptors.request.use((req) => {

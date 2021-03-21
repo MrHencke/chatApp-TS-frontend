@@ -4,7 +4,7 @@ import moment from 'moment';
 import '../../../assets/scss/Chat.scss';
 import { IChat } from '../../../store/interfaces/IChat';
 import { RootState } from '../../../store/reducers';
-import NewChatModal from './NewChatModal';
+import NewChatModal from './util/NewChatModal';
 import RecentElement from './RecentElement';
 
 interface Props {

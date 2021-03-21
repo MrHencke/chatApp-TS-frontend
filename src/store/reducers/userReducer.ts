@@ -14,6 +14,9 @@ import {
 	NEWCHAT,
 	TYPINGMESSAGE,
 	STOPPEDTYPING,
+	NEWCHATNAME,
+	USERLEFTCHAT,
+	REMOVECHAT,
 } from '../actions/user/actionTypes';
 import { userAction } from '../interfaces/actionInterfaces/userAction';
 import initialUser from '../initialStates/initialUser';
@@ -139,6 +142,34 @@ const userReducer: Reducer<IUser, userAction> = (state = initialUser, action: us
 				state.chats![_indexOfChat!].isTyping?.push(action.payload.typingStatus?.username!);
 			}
 
+			return {
+				...state,
+			};
+
+		case NEWCHATNAME:
+			let indexOfChatWithName = state.chats
+				?.slice()
+				.findIndex((chat) => chat._id === action.payload.newChatName?.chatID);
+			if (state.chats)
+				state.chats[indexOfChatWithName!].name = action.payload.newChatName?.chatName!;
+			return {
+				...state,
+			};
+
+		case USERLEFTCHAT:
+			let indexOfChatUserLeft = state.chats
+				?.slice()
+				.findIndex((chat) => chat._id === action.payload.newChat?._id);
+			if (state.chats) state.chats[indexOfChatUserLeft!] = action.payload.newChat!;
+			return {
+				...state,
+			};
+
+		case REMOVECHAT:
+			let indexToRemove = state.chats
+				?.slice()
+				.findIndex((chat) => chat._id === action.payload.removeChat);
+			if (indexToRemove !== undefined) state.chats!.splice(indexToRemove, 1);
 			return {
 				...state,
 			};

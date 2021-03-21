@@ -8,6 +8,8 @@ import { Socket } from 'socket.io-client';
 import { newChat } from '../store/actions/user/newChat';
 import { typingMessage } from '../store/actions/user/typingMessage';
 import { stoppedTyping } from '../store/actions/user/stoppedTyping';
+import { newChatName } from '../store/actions/user/newChatName';
+import { userLeftChat } from '../store/actions/user/userLeftChat';
 
 const SocketIOFunctionality = () => {
 	const dispatch = useDispatch();
@@ -65,6 +67,26 @@ const SocketIOFunctionality = () => {
 		});
 		return () => {
 			socket.off('stoppedTypingReturn');
+		};
+	});
+
+	useEffect(() => {
+		socket.on('newChatNameReturn', (data) => {
+			console.log(data);
+			dispatch(newChatName(data));
+		});
+		return () => {
+			socket.off('newChatNameReturn');
+		};
+	});
+
+	useEffect(() => {
+		socket.on('userLeftChatReturn', (data) => {
+			console.log(data);
+			dispatch(userLeftChat(data));
+		});
+		return () => {
+			socket.off('userLeftChatReturn');
 		};
 	});
 
