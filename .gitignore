@@ -25,3 +25,5 @@ yarn-debug.log*
 yarn-error.log*
 backend/package-lock.json
 
+.css
+.map.css
