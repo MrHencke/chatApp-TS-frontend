@@ -17,7 +17,7 @@ const newSocket = (history: any) => async (dispatch: Dispatch) => {
 export { newSocket };
 
 const socketInit = (): Socket => {
-	const socket = io(`${config.HTTPS}${config.BACKENDURL}:${config.BACKEND_PORT}`, {
+	const socket = io(`${config.HTTPS}${config.BACKENDURL}`, {
 		path: config.SOCKETROUTE,
 		auth: {
 			token: store.getState().user.token,
