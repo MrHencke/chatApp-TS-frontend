@@ -5,10 +5,13 @@ import { RootReducer, RootState } from './reducers';
 import logger from 'redux-logger';
 
 export function configureStore(initialState?: RootState): Store<RootState> {
-	let middleware = applyMiddleware(thunk, logger);
+	let middleware;
 
 	if (process.env.NODE_ENV === 'development') {
+		middleware = applyMiddleware(thunk, logger);
 		middleware = composeWithDevTools(middleware);
+	} else {
+		middleware = applyMiddleware(thunk);
 	}
 
 	const store = createStore(
