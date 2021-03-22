@@ -17,13 +17,18 @@ const newSocket = (history: any) => async (dispatch: Dispatch) => {
 export { newSocket };
 
 const socketInit = (): Socket => {
-	const socket = io(`${config.HTTPS}${config.BACKENDURL}`, {
-		path: config.SOCKETROUTE,
-		auth: {
-			token: store.getState().user.token,
-		},
-		autoConnect: false,
-	});
+	const socket = io(
+		process.env.NODE_ENV === 'development'
+			? `localhost:8002`
+			: `${config.HTTPS}${config.BACKENDURL}`,
+		{
+			path: config.SOCKETROUTE,
+			auth: {
+				token: store.getState().user.token,
+			},
+			autoConnect: false,
+		}
+	);
 	socket.connect();
 
 	return socket;
