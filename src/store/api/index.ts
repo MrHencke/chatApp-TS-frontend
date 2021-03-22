@@ -5,7 +5,10 @@ import INameChange from '../interfaces/INameChange';
 import config from '../../config';
 
 const API = axios.create({
-	baseURL: `${config.HTTPS}${config.BACKENDURL}${config.APIROUTE}`,
+	baseURL:
+		process.env.NODE_ENV === 'development'
+			? `${config.HTTP}localhost:8002${config.APIROUTE}`
+			: `${config.HTTPS}${config.BACKENDURL}${config.APIROUTE}`,
 });
 
 API.interceptors.request.use((req) => {
