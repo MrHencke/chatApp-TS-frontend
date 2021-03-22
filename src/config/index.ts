@@ -1,6 +1,6 @@
 const HTTP = 'http://';
 const HTTPS = 'https://';
-const BACKENDURL = 'localhost' 
+const BACKENDURL = 'no-hencke-chatapp-backend.herokuapp.com';
 const BACKEND_PORT = '8002';
 const APIROUTE = '/api/';
 const SOCKETROUTE = '/socket';
