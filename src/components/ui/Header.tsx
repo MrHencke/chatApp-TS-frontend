@@ -20,16 +20,24 @@ const Header = () => {
 
 	return (
 		<div>
-			<nav className='navbar navbar-expand-lg navbar-dark bg-dark '>
+			<nav
+				className='navbar navbar-expand-lg navbar-light mt-2 mx-2'
+				style={{
+					borderRadius: '30px',
+					backgroundColor: '#ffffff',
+					boxShadow: '0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1)',
+				}}
+			>
 				<Link className='navbar-brand mx-3' to='/'>
 					<img
 						src={logo}
 						width='40'
 						height='40'
 						className='d-inline-block my-1'
+						style={{ borderRadius: '100%' }}
 						alt=''
 					></img>
-					<span className='mx-3 mt-5'>The Chat App</span>
+					<span className='ml-3 mr-4 mt-5 text'>The Chat App</span>
 				</Link>
 				<button
 					className='navbar-toggler'
@@ -71,81 +79,57 @@ const Header = () => {
 						</li>
 					</ul>
 					<ul className='d-flex justify-content-end ml-auto navbar-nav mx-3'>
-						<li className='nav-item dropdown'>
-							<Link
-								className='nav-link dropdown-toggle'
-								to='#'
-								id='navbarDropdown'
-								role='button'
-								data-toggle='dropdown'
-								aria-haspopup='true'
-								aria-expanded='false'
-							>
-								{user.isLoggedIn ? (
+						{user.isLoggedIn ? (
+							<li className='nav-item dropdown'>
+								<Link
+									className='nav-link dropdown-toggle'
+									to='#'
+									id='navbarDropdown'
+									role='button'
+									data-toggle='dropdown'
+									aria-haspopup='true'
+									aria-expanded='false'
+								>
 									<>
-										{user.profile.username + '  '}
+										<span className='mr-2'>{user.profile.username}</span>
 										<img
 											src={user.profile.profilepicture}
 											width='30'
 											height='30'
 											alt=''
 											style={{ borderRadius: '50%' }}
+											className='ml-1'
 										/>
 									</>
-								) : (
-									<>
-										{'Welcome '}
-										<img
-											src='https://res.cloudinary.com/mrhencke/image/upload/v1616254670/profilePictures/NOAVATAR_uwpx2v.jpg'
-											width='30'
-											height='30'
-											alt=''
-											style={{ borderRadius: '50%' }}
-										/>
-									</>
-								)}
-							</Link>
+								</Link>
 
-							<div
-								className='dropdown-menu dropdown-menu-right bg-dark'
-								id='white-text'
-								aria-labelledby='navbarDropdown'
-							>
-								{user.isLoggedIn ? (
-									<Link className='dropdown-item' id='white-text' to='/settings'>
+								<div
+									className='dropdown-menu dropdown-menu-right mt-3'
+									aria-labelledby='navbarDropdown'
+								>
+									<Link className='dropdown-item' to='/settings'>
 										Settings
 									</Link>
-								) : null}
+									<div className='dropdown-divider'></div>
 
-								<Link className='dropdown-item' id='white-text' to='404'>
-									TODO
-								</Link>
-								<div className='dropdown-divider'></div>
-								{user.isLoggedIn ? (
 									<Link
 										className='dropdown-item'
-										id='white-text'
 										to='/logout'
 										onClick={() => logOut()}
 									>
 										Log Out
 									</Link>
-								) : (
-									<>
-										<Link className='dropdown-item' id='white-text' to='/login'>
-											Log In
-										</Link>
-										<Link
-											className='dropdown-item'
-											id='white-text'
-											to='/signup'
-										>
-											Sign Up
-										</Link>
-									</>
-								)}
-							</div>
-						</li>
+								</div>
+							</li>
+						) : (
+							<Link
+								to='/login'
+								className='btn btn-primary'
+								style={{ borderRadius: '50px' }}
+							>
+								Log in
+							</Link>
+						)}
 					</ul>
 				</div>
 			</nav>

@@ -12,22 +12,25 @@ interface Props {
 	currentChat: string | null;
 }
 const ChatSettings = ({ chat, userID, currentChat }: Props) => {
-    const dispatch = useDispatch()
+	const dispatch = useDispatch();
 	const socket = useSelector((state: RootState) => state.app.socket);
 	const handleLeave = () => {
 		const chatID = chat._id;
-        dispatch(changeCurrentChat(null));
+		dispatch(changeCurrentChat(null));
 		socket!.emit('userLeftChat', { userID, chatID });
-        dispatch(removeChat(chatID))
+		dispatch(removeChat(chatID));
 	};
 	return (
 		<div className='ml-auto'>
 			{currentChat ? (
-				<div className='btn-group dropleft'>
+				<div className="dropleft">
 					<button
-						type='button'
-						className='btn btn-secondary dropdown-toggle'
+						className='btn btn-secondary'
 						data-toggle='dropdown'
+						style={{
+							borderRadius: '30px',
+							boxShadow: '0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1)',
+						}}
 					>
 						Chat Settings
 					</button>

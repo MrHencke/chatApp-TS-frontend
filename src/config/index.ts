@@ -1,6 +1,6 @@
 const HTTP = 'http://';
 const HTTPS = 'https://';
-const BACKENDURL = 'localhost';
+const BACKENDURL = 'localhost' 
 const BACKEND_PORT = '8002';
 const APIROUTE = '/api/';
 const SOCKETROUTE = '/socket';
@@ -11,6 +11,6 @@ const config = {
 	BACKENDURL,
 	BACKEND_PORT,
 	APIROUTE,
-	SOCKETROUTE
+	SOCKETROUTE,
 };
 export default config;

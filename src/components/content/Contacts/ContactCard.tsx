@@ -13,7 +13,14 @@ const ContactCard: React.FC<Props> = ({ contact }) => {
 	};
 
 	return (
-		<div className='col-sg mx-4 my-5 w-25' id='roundedcard'>
+		<div
+			className='col-sg mx-4 my-5 w-25'
+			style={{
+				borderRadius: '30px',
+				backgroundColor: '#ffffff',
+				boxShadow: '0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1)',
+			}}
+		>
 			<div className='card rounded-lg '>
 				<div className='card-body text-center bg-light'>
 					<img
@@ -24,10 +31,7 @@ const ContactCard: React.FC<Props> = ({ contact }) => {
 						alt=''
 					/>
 					<h5 className='card-title'>{contact.username}</h5>
-					<p className='card-text'>Testing</p>
-					{/*<Link to={`/chats/${contact._id}`} className='btn btn-primary'>
-						Go to chat
-	</Link>*/}
+
 					<hr />
 					<form onSubmit={handleRemoveContact}>
 						<button className='btn btn-primary' type='submit'>

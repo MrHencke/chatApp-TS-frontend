@@ -115,7 +115,7 @@ const Signup = () => {
 										type='file'
 										id='profilePicture'
 										name='profilePicture'
-										className='form-control'
+										className='form-control-file'
 										placeholder='Profile Picture'
 										onChange={(e) => {
 											if (e.target.files) setFile(e.target.files[0]);

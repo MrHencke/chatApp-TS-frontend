@@ -7,6 +7,8 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../../store/reducers';
 import UserTyping from './Messages/types/UserTyping';
 import ChatSettings from './util/ChatSettings';
+import NoSelectedChat from './util/NoSelectedChat';
+import NoMessagesInChat from './util/NoMessagesInChat';
 interface Props {
 	socket: Socket;
 }
@@ -29,14 +31,6 @@ const SelectedChat = ({ socket }: Props) => {
 	const usersTyping = chat?.isTyping;
 	const [usersTypingString, setUsersTypingString] = useState('');
 
-	const handleLeave = () => {
-		if (chat) {
-			let chatID = chat!._id;
-			let memberID = user.profile.id;
-			let data = { memberID, chatID };
-			socket!.emit('removeMember', data);
-		}
-	};
 	const RenderTyping = () => {
 		if (usersTyping && usersTyping.length !== 0) {
 			usersTyping.length === 1
@@ -51,18 +45,24 @@ const SelectedChat = ({ socket }: Props) => {
 	const RenderChat = () => {
 		return (
 			<>
-				{chat !== undefined
-					? chat.messages.map((msg) => {
-							return (
-								<Message
-									key={msg._id}
-									message={msg}
-									userID={user.profile.id}
-									chatusers={chat.users}
-								/>
-							);
-					  })
-					: null}
+				{chat !== undefined ? (
+					<div>
+						{chat.messages.length !== 0
+							? chat.messages.map((msg) => {
+									return (
+										<Message
+											key={msg._id}
+											message={msg}
+											userID={user.profile.id}
+											chatusers={chat.users}
+										/>
+									);
+							  })
+							: <NoMessagesInChat/>}
+					</div>
+				) : (
+					<NoSelectedChat />
+				)}
 			</>
 		);
 	};
