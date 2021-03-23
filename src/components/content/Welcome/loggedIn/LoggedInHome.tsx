@@ -9,6 +9,10 @@ const LoggedInHome = () => {
 	const onlineUsers = useSelector((state: RootState) => state.app.onlineUsers);
 	const welcomeMessage = user.firstTimeLogin ? 'Welcome ' : 'Welcome back ';
 	const grammar = onlineUsers.length === 1 ? [' is ', 'user'] : [' are ', 'users'];
+	const message =
+		onlineUsers.length === 0
+			? 'invite your friends, then connect with them in them in the Users tab.'
+			: 'connect with them in them in the Users tab.';
 	const amount = onlineUsers.length < 11 ? numbers[onlineUsers.length] : onlineUsers.length;
 	return (
 		<>
@@ -17,8 +21,7 @@ const LoggedInHome = () => {
 			</CenteredCol>
 			<CenteredCol />
 			<CenteredCol>
-				There {grammar[0]} currently {amount} {grammar[1]} online, connect with them in them
-				in the Users tab.
+				There {grammar[0]} currently {amount} {grammar[1]} online, {message}
 			</CenteredCol>
 		</>
 	);
