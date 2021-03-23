@@ -1,7 +1,6 @@
-import React from 'react';
 import ContactCard from './ContactCard';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../store/reducers';
+import { RootState } from '../../../../store/reducers';
 import NoContacts from './NoContacts';
 
 const Contacts = () => {

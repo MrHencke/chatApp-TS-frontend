@@ -1,0 +1,51 @@
+@keyframes linearGradientFlow {
+	0% {
+		background-position: 0%;
+	}
+
+	100% {
+		background-position: 200%;
+	}
+}
+
+.online {
+	position: relative;
+	display: inline-block; /* <= shrinks container to image size */
+}
+
+.online::before {
+	border-radius: 100px;
+	background: linear-gradient(to right, #0bc442 0%, green 50%, #26960a 100%);
+	background-size: 200%;
+	animation: linearGradientFlow 5s infinite linear;
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 106%;
+	height: 106%;
+	padding: 5px;
+	transform: translate(-50%, -50%);
+	z-index: 1;
+}
+
+.online img {
+	display: block;
+	border-radius: 100%;
+
+	position: relative;
+	z-index: 2;
+}
+
+.portrait {
+	position: relative;
+	display: inline-block; /* <= shrinks container to image size */
+}
+
+.portrait img {
+	display: block;
+	border-radius: 100%;
+
+	position: relative;
+	z-index: 2;
+}

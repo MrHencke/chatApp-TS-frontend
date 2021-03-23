@@ -1,8 +1,8 @@
 import React, { FormEvent } from 'react';
-import { IContact } from '../../../store/interfaces/IContact';
-import '../../../assets/scss/Contact.scss';
-import { removeContact } from '../../../store/actions/user/removeContact';
+import { IContact } from '../../../../store/interfaces/IContact';
+import { removeContact } from '../../../../store/actions/user/removeContact';
 import { useDispatch } from 'react-redux';
+import ProfilePicture from '../ProfilePicture';
 
 const ContactCard: React.FC<Props> = ({ contact }) => {
 	const dispatch = useDispatch();
@@ -13,25 +13,16 @@ const ContactCard: React.FC<Props> = ({ contact }) => {
 	};
 
 	return (
-		<div
-			className='col-sg mx-4 my-5 w-25'
-			style={{
-				borderRadius: '30px',
-				backgroundColor: '#ffffff',
-				boxShadow: '0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1)',
-			}}
-		>
-			<div className='card rounded-lg '>
-				<div className='card-body text-center bg-light'>
-					<img
-						className=''
-						width='100'
-						height='100'
-						src={contact.profilepicture}
-						alt=''
-					/>
+		<div className='col-sg mx-4 my-5 w-25'>
+			<div
+				className='card card-signin my-5'
+				id='roundedCard'
+			>
+				<div className='card-body text-center'>
+					<div className='my-2'>
+						<ProfilePicture profilepicture={contact.profilepicture} id={contact._id} />
+					</div>
 					<h5 className='card-title'>{contact.username}</h5>
-
 					<hr />
 					<form onSubmit={handleRemoveContact}>
 						<button className='btn btn-primary' type='submit'>

@@ -17,6 +17,7 @@ const initialUser: IUser = {
 	token: '',
 	loading: false,
 	error: '',
+	firstTimeLogin: false,
 };
 
 export default initialUser;

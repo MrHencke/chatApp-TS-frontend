@@ -10,9 +10,14 @@ import { typingMessage } from '../store/actions/user/typingMessage';
 import { stoppedTyping } from '../store/actions/user/stoppedTyping';
 import { newChatName } from '../store/actions/user/newChatName';
 import { userLeftChat } from '../store/actions/user/userLeftChat';
+import { setOnlineUsers } from '../store/actions/app/setOnlineUsers';
+import { socketDisconnect } from '../store/actions/app/socketDisconnect';
+import { useHistory } from 'react-router';
+import { logoutUnauthorized } from '../store/actions/user/logoutUnauthorized';
 
 const SocketIOFunctionality = () => {
 	const dispatch = useDispatch();
+	const history = useHistory();
 
 	//@ts-ignore
 	const socket: Socket = useSelector((state: RootState) => state.app.socket);
@@ -33,7 +38,6 @@ const SocketIOFunctionality = () => {
 
 	useEffect(() => {
 		socket.on('chatCreated', (chat: IChat) => {
-			console.log(chat);
 			socket.emit('join', chat._id);
 			dispatch(newChat(chat));
 		});
@@ -52,7 +56,6 @@ const SocketIOFunctionality = () => {
 
 	useEffect(() => {
 		socket.on('isTypingReturn', (data) => {
-			console.log(data.username + ' Is typing');
 			dispatch(typingMessage(data));
 		});
 		return () => {
@@ -62,7 +65,6 @@ const SocketIOFunctionality = () => {
 
 	useEffect(() => {
 		socket.on('stoppedTypingReturn', (data) => {
-			console.log(data.username + ' Is typing');
 			dispatch(stoppedTyping(data));
 		});
 		return () => {
@@ -72,7 +74,6 @@ const SocketIOFunctionality = () => {
 
 	useEffect(() => {
 		socket.on('newChatNameReturn', (data) => {
-			console.log(data);
 			dispatch(newChatName(data));
 		});
 		return () => {
@@ -82,11 +83,54 @@ const SocketIOFunctionality = () => {
 
 	useEffect(() => {
 		socket.on('userLeftChatReturn', (data) => {
-			console.log(data);
 			dispatch(userLeftChat(data));
 		});
 		return () => {
 			socket.off('userLeftChatReturn');
+		};
+	});
+
+	useEffect(() => {
+		socket.on('onlineUsers', (data: string[]) => {
+			dispatch(setOnlineUsers(data));
+		});
+		return () => {
+			socket.off('onlineUsers');
+		};
+	});
+
+	useEffect(() => {
+		socket.on('error', (error) => {
+			if (error.message === 'Unauthorized') {
+				dispatch(logoutUnauthorized(history));
+				dispatch(socketDisconnect());
+			}
+			console.log(error);
+		});
+		return () => {
+			socket.off('error');
+		};
+	});
+
+	useEffect(() => {
+		socket.on('disconnect', () => {
+			dispatch(logoutUnauthorized(history));
+			dispatch(socketDisconnect());
+		});
+		return () => {
+			socket.off('disconnect');
+		};
+	});
+
+	useEffect(() => {
+		socket.on('connect_error', (error) => {
+			if (error.message === 'Unauthorized') {
+				dispatch(logoutUnauthorized(history));
+				dispatch(socketDisconnect());
+			}
+		});
+		return () => {
+			socket.off('connect_error');
 		};
 	});
 

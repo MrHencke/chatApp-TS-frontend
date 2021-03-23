@@ -74,7 +74,7 @@ const Header = () => {
 								className={`nav-link ${user.isLoggedIn ? '' : 'disabled'}`}
 								to='/userlist'
 							>
-								All Users
+								Users
 							</Link>
 						</li>
 					</ul>

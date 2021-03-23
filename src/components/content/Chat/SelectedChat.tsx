@@ -47,18 +47,20 @@ const SelectedChat = ({ socket }: Props) => {
 			<>
 				{chat !== undefined ? (
 					<div>
-						{chat.messages.length !== 0
-							? chat.messages.map((msg) => {
-									return (
-										<Message
-											key={msg._id}
-											message={msg}
-											userID={user.profile.id}
-											chatusers={chat.users}
-										/>
-									);
-							  })
-							: <NoMessagesInChat/>}
+						{chat.messages.length !== 0 ? (
+							chat.messages.map((msg) => {
+								return (
+									<Message
+										key={msg._id}
+										message={msg}
+										userID={user.profile.id}
+										chatusers={chat.users}
+									/>
+								);
+							})
+						) : (
+							<NoMessagesInChat />
+						)}
 					</div>
 				) : (
 					<NoSelectedChat />
