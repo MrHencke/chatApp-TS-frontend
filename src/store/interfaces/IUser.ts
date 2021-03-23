@@ -12,6 +12,7 @@ interface IUser {
 	isLoggedIn: boolean;
 	status?: number;
 	message?: string;
+	firstTimeLogin: boolean;
 }
 
 export type { IUser };

@@ -4,6 +4,7 @@ import {
 	NEWSOCKET,
 	CHANGECURRENTCHAT,
 	SOCKETDISCONNECT,
+	SETONLINEUSERS,
 } from '../actions/app/actionTypes';
 import { Reducer } from 'redux';
 import { IApp } from '../interfaces/IApp';
@@ -39,6 +40,12 @@ const appReducer: Reducer<IApp, appAction> = (state = initialApp, action: appAct
 			return {
 				...state,
 				currentChat: action.payload.data.currentChat,
+			};
+
+		case SETONLINEUSERS:
+			return {
+				...state,
+				onlineUsers: action.payload.data.onlineUsers,
 			};
 		default:
 			return state;

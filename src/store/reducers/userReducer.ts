@@ -17,6 +17,8 @@ import {
 	NEWCHATNAME,
 	USERLEFTCHAT,
 	REMOVECHAT,
+	SETLOADING,
+	FIRSTTIMELOGIN,
 } from '../actions/user/actionTypes';
 import { userAction } from '../interfaces/actionInterfaces/userAction';
 import initialUser from '../initialStates/initialUser';
@@ -72,6 +74,18 @@ const userReducer: Reducer<IUser, userAction> = (state = initialUser, action: us
 				token: action.payload.data.token,
 				loading: false,
 				error: '',
+			};
+
+		case SETLOADING:
+			return {
+				...state,
+				loading: action.payload.data.loading,
+			};
+
+		case FIRSTTIMELOGIN:
+			return {
+				...state,
+				firstTimeLogin: action.payload.data.firstTimeLogin,
 			};
 
 		case NAMECHANGE_FAILURE:

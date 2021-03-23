@@ -10,7 +10,7 @@ const signup = (formData: ISignup | FormData, router: any) => async (dispatch: D
 			if (data) {
 				if (data.status === 201) {
 					dispatch({ type: SIGNUP_SUCCESS, payload: data });
-					router.push('/response/success');
+					router.push('/response/success/firsttime');
 				}
 			}
 		})

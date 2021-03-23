@@ -10,7 +10,7 @@ interface Props {
 }
 const userThatLeft = {
 	_id: '0',
-	username: 'User that left',
+	username: 'User left',
 	profilepicture:
 		'https://res.cloudinary.com/mrhencke/image/upload/w_512,h_512,c_thumb,g_face,r_max/v1616254670/profilePictures/NOAVATAR_uwpx2v.jpg',
 };
@@ -23,14 +23,12 @@ const Message = ({ userID, message, chatusers }: Props) => {
 			{userID === message.from_id ? (
 				<ReceivedMessage
 					message={message}
-					authorName={user!.username}
-					authorPicture={user!.profilepicture}
-				/>
+					user={user}
+					/>
 			) : (
 				<SentMessage
 					message={message}
-					authorName={user!.username}
-					authorPicture={user!.profilepicture}
+					user={user}
 				/>
 			)}
 		</>

@@ -5,16 +5,19 @@ import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../store/actions/user/login';
 import { RootState } from '../../store/reducers';
+import setLoading from '../../store/actions/user/setLoading';
 
 const Login = () => {
 	const history = useHistory();
 	const dispatch = useDispatch();
+	const userLoading = useSelector((state: RootState) => state.user.loading);
 	const loginError = useSelector((state: RootState) => state.user.error);
 
 	const [form, setForm] = useState(initialForm);
 
 	const handleSubmit = (e: FormEvent) => {
 		e.preventDefault();
+		dispatch(setLoading(true));
 		dispatch(login(form, history));
 	};
 
@@ -34,45 +37,55 @@ const Login = () => {
 						<div className='card-body'>
 							<h5 className='card-title text-center'>Sign In</h5>
 							<form className='form-signin' onSubmit={handleSubmit}>
-								<div className='form-label-group'>
-									<input
-										type='email'
-										id='inputEmail'
-										className='form-control'
-										name='email'
-										placeholder='Email address'
-										required
-										autoFocus
-										onChange={handleChange}
-									/>
-									<label htmlFor='inputEmail'>Email address</label>
-								</div>
+								{userLoading ? (
+									<div className='text-center'>
+										<div className='spinner-border' role='status'>
+											<span className='sr-only'>Loading...</span>
+										</div>
+									</div>
+								) : (
+									<div>
+										<div className='form-label-group'>
+											<input
+												type='email'
+												id='inputEmail'
+												className='form-control'
+												name='email'
+												placeholder='Email address'
+												required
+												autoFocus
+												onChange={handleChange}
+											/>
+											<label htmlFor='inputEmail'>Email address</label>
+										</div>
 
-								<div className='form-label-group'>
-									<input
-										type='password'
-										id='inputPassword'
-										className='form-control'
-										name='password'
-										placeholder='Password'
-										required
-										onChange={handleChange}
-									/>
-									<label htmlFor='inputPassword'>Password</label>
-								</div>
+										<div className='form-label-group'>
+											<input
+												type='password'
+												id='inputPassword'
+												className='form-control'
+												name='password'
+												placeholder='Password'
+												required
+												onChange={handleChange}
+											/>
+											<label htmlFor='inputPassword'>Password</label>
+										</div>
 
-								{loginError === '' ? null : (
-									<div className='text-center mb-3'>{loginError}</div>
+										{loginError === '' ? null : (
+											<div className='text-center mb-3'>{loginError}</div>
+										)}
+										<button
+											className='btn btn-lg btn-primary btn-block text-uppercase'
+											type='submit'
+										>
+											Sign in
+										</button>
+										<div className='text-center mt-4 mb-1'>
+											<Link to='/signup'>Not signed up yet?</Link>
+										</div>
+									</div>
 								)}
-								<button
-									className='btn btn-lg btn-primary btn-block text-uppercase'
-									type='submit'
-								>
-									Sign in
-								</button>
-								<div className='text-center mt-4 mb-1'>
-									<Link to='/signup'>Not signed up yet?</Link>
-								</div>
 							</form>
 						</div>
 					</div>
