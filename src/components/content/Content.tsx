@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import Home from './Welcome/Home';
 import Contacts from './cards/Contacts/Contacts';
-import Chat from './Chat/Chat';
+import ChatWindow from './Chat/ChatWindow';
 import Settings from '../auth/Settings';
 import { match } from 'react-router-dom';
 import { RootState } from '../../store/reducers/';
@@ -23,8 +23,8 @@ const Content: FC<MatchProps> = ({ match }) => {
 					<SocketIOFunctionality />
 					{currentUrl === '/' && <Home />}
 					{currentUrl === '/contacts' && <Contacts />}
-					{currentUrl === '/chats/:id' && <Chat />}
-					{currentUrl === '/chats' && <Chat />}
+					{currentUrl === '/chats/:id' && <ChatWindow />}
+					{currentUrl === '/chats' && <ChatWindow />}
 					{currentUrl === '/userlist' && <Userlist />}
 					{currentUrl === '/settings' && <Settings />}
 				</>
