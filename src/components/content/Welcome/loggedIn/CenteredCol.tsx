@@ -1,5 +1,3 @@
-import { Children } from 'react';
-
 const CenteredCol = (props: any) => {
 	return (
 		<div className='col'>
