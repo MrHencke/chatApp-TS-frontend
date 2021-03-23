@@ -4,6 +4,7 @@ import { Modal } from 'react-bootstrap';
 import Select, { ValueType } from 'react-select';
 import { FormEvent, useState } from 'react';
 import { IChat } from '../../../../store/interfaces/IChat';
+import '../../../../assets/scss/Modal.scss';
 
 interface Props {
 	chat: IChat;
@@ -83,9 +84,10 @@ const ChatSettingsModal = ({ chat }: Props) => {
 										onChange={handleChangeName}
 										placeholder='New Chat name'
 									/>
+									<br />
 								</>
 							) : null}
-							<h5 className='pt-5'>Add Chat Members</h5>
+							<h5 className='pt-auto'>Add Chat Members</h5>
 							{/* TODO find contacts not present in chat, present by name */}
 							<Select
 								options={contactOptions}
@@ -101,7 +103,7 @@ const ChatSettingsModal = ({ chat }: Props) => {
 
 					<Modal.Footer>
 						<button
-							className='btn btn-lg btn-primary btn-block'
+							className='btn btn-lg btn-primary btn-block roundedbutton'
 							type='submit'
 							disabled={chatName.length === 0 && newMembers.length === 0}
 							onClick={handleSubmit}
