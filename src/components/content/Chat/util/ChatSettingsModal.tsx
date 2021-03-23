@@ -19,9 +19,11 @@ const ChatSettingsModal = ({ chat }: Props) => {
 	type OptionsType = { label: string; value: string };
 
 	let contactOptions: OptionsType[] = [];
-	if (user.contacts) {
+	if (user.contacts && chat.users) {
 		user.contacts.forEach((contact) => {
-			contactOptions.push({ label: contact.username, value: contact._id });
+			if (!chat.users.find((user) => user._id === contact._id)) {
+				contactOptions.push({ label: contact.username, value: contact._id });
+			}
 		});
 	}
 

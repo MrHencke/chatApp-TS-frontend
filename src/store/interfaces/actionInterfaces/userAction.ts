@@ -1,4 +1,5 @@
 import { newChatNameData } from '../../actions/user/newChatName';
+import { addMemberToChatData } from '../../actions/user/addMemberToChat';
 import { IChat } from '../IChat';
 import IMessage from '../IMessage';
 import { TypingData } from '../ITypingData';
@@ -13,6 +14,7 @@ type userAction = {
 		typingStatus?: TypingData;
 		newChatName?: newChatNameData;
 		removeChat?: string;
+		addMemberToChat?: addMemberToChatData;
 	};
 };
 

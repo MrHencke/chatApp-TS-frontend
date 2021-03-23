@@ -14,6 +14,7 @@ import { setOnlineUsers } from '../store/actions/app/setOnlineUsers';
 import { socketDisconnect } from '../store/actions/app/socketDisconnect';
 import { useHistory } from 'react-router';
 import { logoutUnauthorized } from '../store/actions/user/logoutUnauthorized';
+import { addMemberToChat } from '../store/actions/user/addMemberToChat';
 
 const SocketIOFunctionality = () => {
 	const dispatch = useDispatch();
@@ -131,6 +132,16 @@ const SocketIOFunctionality = () => {
 		});
 		return () => {
 			socket.off('connect_error');
+		};
+	});
+
+	useEffect(() => {
+		socket.on('addMembersReturn', (data) => {
+			console.log(data);
+			dispatch(addMemberToChat(data));
+		});
+		return () => {
+			socket.off('addMembersReturn');
 		};
 	});
 
