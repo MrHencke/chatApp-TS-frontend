@@ -3,6 +3,7 @@ import { IContact } from '../../../../store/interfaces/IContact';
 import { removeContact } from '../../../../store/actions/user/removeContact';
 import { useDispatch } from 'react-redux';
 import ProfilePicture from '../ProfilePicture';
+import '../../../../assets/scss/ContactCard.scss';
 
 const ContactCard: React.FC<Props> = ({ contact }) => {
 	const dispatch = useDispatch();
@@ -13,11 +14,8 @@ const ContactCard: React.FC<Props> = ({ contact }) => {
 	};
 
 	return (
-		<div className='col-sg mx-4 my-5 w-25'>
-			<div
-				className='card card-signin my-5'
-				id='roundedCard'
-			>
+		<div className='col-xl-3 col-lg-4 col-md-5 col-sm-12 col-xs-12'>
+			<div className='card card-contact my-5 mx-auto' id='roundedCard'>
 				<div className='card-body text-center'>
 					<div className='my-2'>
 						<ProfilePicture profilepicture={contact.profilepicture} id={contact._id} />

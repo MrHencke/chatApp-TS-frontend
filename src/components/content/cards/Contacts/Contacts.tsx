@@ -10,8 +10,8 @@ const Contacts = () => {
 	return (
 		<>
 			{contacts !== null && contacts.length > 0 ? (
-				<div className='container'>
-					<div className='row my-5'>
+				<div className='container my-auto'>
+					<div className='row my-auto'>
 						{contacts.map((contact) => {
 							return <ContactCard contact={contact} />; //contact={contact} pass contacts in as props later
 						})}

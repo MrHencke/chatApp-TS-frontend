@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
-import NextIcon from './NextIcon';
-import PrevIcon from './PrevIcon';
+import '../../../../../assets/scss/Carousel.scss';
+
 const CarouselElement = () => {
 	const [index, setIndex] = useState(0);
 	const interval = 2000;
@@ -10,12 +10,7 @@ const CarouselElement = () => {
 	};
 
 	return (
-		<Carousel
-			activeIndex={index}
-			onSelect={handleSelect}
-			nextIcon={<NextIcon />}
-			prevIcon={<PrevIcon />}
-		>
+		<Carousel activeIndex={index} onSelect={handleSelect}>
 			<Carousel.Item interval={interval}>
 				<img
 					className='d-block w-100'

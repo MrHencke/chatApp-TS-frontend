@@ -15,8 +15,8 @@ const Userlist = () => {
 	});
 
 	return (
-		<div className='container'>
-			<div className='row my-5'>
+		<div className='container my-auto'>
+			<div className='row my-auto'>
 				{users !== null
 					? users.map((user) => {
 							return <UserCard user={user} />;
