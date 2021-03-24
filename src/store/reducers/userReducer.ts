@@ -20,6 +20,7 @@ import {
 	SETLOADING,
 	FIRSTTIMELOGIN,
 	ADDMEMBERTOCHAT,
+	SETERROR,
 } from '../actions/user/actionTypes';
 import { userAction } from '../interfaces/actionInterfaces/userAction';
 import initialUser from '../initialStates/initialUser';
@@ -43,6 +44,12 @@ const userReducer: Reducer<IUser, userAction> = (state = initialUser, action: us
 		case LOGIN_FAILURE:
 			return {
 				...initialUser,
+				error: action.payload.data.message!,
+			};
+
+		case SETERROR:
+			return {
+				...state,
 				error: action.payload.data.message!,
 			};
 

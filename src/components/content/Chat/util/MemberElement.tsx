@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { IChat } from '../../../../store/interfaces/IChat';
 import { RootState } from '../../../../store/reducers';
+import ProfilePicture from '../../cards/ProfilePicture';
 
 interface Props {
 	member: {
@@ -17,13 +18,18 @@ const MemberElement = ({ member, chat }: Props) => {
 
 	const handleRemoval = () => {
 		let chatID = chat._id;
-		let memberID = member._id;
-		let data = { memberID, chatID };
-		socket!.emit('removeMember', data);
+		let userID = member._id;
+		let data = { userID, chatID };
+		if (socket) socket.emit('removeMember', data);
 	};
 	return (
 		<div className='media w-100 mb-3'>
-			<img src={member.profilepicture} alt='' width='50' height='50' />
+			<ProfilePicture
+				profilepicture={member.profilepicture}
+				id={member._id}
+				width='50'
+				height='50'
+			/>
 			<div className='media-body ml-3'>
 				<div className='bg-light rounded py-2 px-3 mb-2 text-break'>{member.username}</div>
 			</div>

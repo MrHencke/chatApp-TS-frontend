@@ -15,6 +15,9 @@ import { socketDisconnect } from '../store/actions/app/socketDisconnect';
 import { useHistory } from 'react-router';
 import { logoutUnauthorized } from '../store/actions/user/logoutUnauthorized';
 import { addMemberToChat } from '../store/actions/user/addMemberToChat';
+import { logoutApp } from '../store/actions/app/logoutApp';
+import { changeCurrentChat } from '../store/actions/app/changeCurrentChat';
+import { removeChat } from '../store/actions/user/removeChat';
 
 const SocketIOFunctionality = () => {
 	const dispatch = useDispatch();
@@ -116,7 +119,7 @@ const SocketIOFunctionality = () => {
 	useEffect(() => {
 		socket.on('disconnect', () => {
 			dispatch(logoutUnauthorized(history));
-			dispatch(socketDisconnect());
+			dispatch(logoutApp());
 		});
 		return () => {
 			socket.off('disconnect');
@@ -127,7 +130,7 @@ const SocketIOFunctionality = () => {
 		socket.on('connect_error', (error) => {
 			if (error.message === 'Unauthorized') {
 				dispatch(logoutUnauthorized(history));
-				dispatch(socketDisconnect());
+				dispatch(logoutApp());
 			}
 		});
 		return () => {
@@ -137,11 +140,20 @@ const SocketIOFunctionality = () => {
 
 	useEffect(() => {
 		socket.on('addMembersReturn', (data) => {
-			console.log(data);
 			dispatch(addMemberToChat(data));
 		});
 		return () => {
 			socket.off('addMembersReturn');
+		};
+	});
+
+	useEffect(() => {
+		socket.on('leaveChat', (chatID) => {
+			dispatch(changeCurrentChat(null));
+			dispatch(removeChat(chatID));
+		});
+		return () => {
+			socket.off('leaveChat');
 		};
 	});
 

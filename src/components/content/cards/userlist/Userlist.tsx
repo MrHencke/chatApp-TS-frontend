@@ -8,10 +8,16 @@ import UserCard from './UserCard';
 const Userlist = () => {
 	const dispatch = useDispatch();
 	const users = useSelector((state: RootState) => state.app.users);
-	//TODO Update way of fetching users
+
+	const timeOutFunction = () => {
+		dispatch(getAllUsers());
+		setTimeout(timeOutFunction, 60000);
+	};
+	//TODO Update method of fetching users and displaying users
 	useEffect(() => {
 		if (users === null) {
 			dispatch(getAllUsers());
+			setTimeout(timeOutFunction, 60000);
 		}
 	});
 

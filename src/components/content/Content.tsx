@@ -2,7 +2,7 @@ import { FC } from 'react';
 import Home from './Welcome/Home';
 import Contacts from './cards/Contacts/Contacts';
 import ChatWindow from './Chat/ChatWindow';
-import Settings from '../auth/Settings';
+import Settings from '../auth/settings/Settings';
 import { match } from 'react-router-dom';
 import { RootState } from '../../store/reducers/';
 import { useSelector } from 'react-redux';
