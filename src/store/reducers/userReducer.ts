@@ -19,6 +19,8 @@ import {
 	REMOVECHAT,
 	SETLOADING,
 	FIRSTTIMELOGIN,
+	ADDMEMBERTOCHAT,
+	SETERROR,
 } from '../actions/user/actionTypes';
 import { userAction } from '../interfaces/actionInterfaces/userAction';
 import initialUser from '../initialStates/initialUser';
@@ -42,6 +44,12 @@ const userReducer: Reducer<IUser, userAction> = (state = initialUser, action: us
 		case LOGIN_FAILURE:
 			return {
 				...initialUser,
+				error: action.payload.data.message!,
+			};
+
+		case SETERROR:
+			return {
+				...state,
 				error: action.payload.data.message!,
 			};
 
@@ -184,6 +192,16 @@ const userReducer: Reducer<IUser, userAction> = (state = initialUser, action: us
 				?.slice()
 				.findIndex((chat) => chat._id === action.payload.removeChat);
 			if (indexToRemove !== undefined) state.chats!.splice(indexToRemove, 1);
+			return {
+				...state,
+			};
+
+		case ADDMEMBERTOCHAT:
+			let indexToAdd = state.chats
+				?.slice()
+				.findIndex((chat) => chat._id === action.payload.addMemberToChat!.chatID);
+			if (indexToAdd !== undefined && state.chats)
+				state.chats[indexToAdd].users.push(action.payload.addMemberToChat!.user);
 			return {
 				...state,
 			};

@@ -7,13 +7,14 @@ import CenteredCol from './CenteredCol';
 const LoggedInHome = () => {
 	const user = useSelector((state: RootState) => state.user);
 	const onlineUsers = useSelector((state: RootState) => state.app.onlineUsers);
+	const usersOnline = onlineUsers.length - 1 === -1 ? onlineUsers.length : onlineUsers.length - 1;
 	const welcomeMessage = user.firstTimeLogin ? 'Welcome ' : 'Welcome back ';
-	const grammar = onlineUsers.length === 1 ? [' is ', 'user'] : [' are ', 'users'];
+	const grammar = usersOnline === 1 ? [' is ', 'user'] : [' are ', 'users'];
 	const message =
-		onlineUsers.length === 0
+		usersOnline === 0
 			? 'invite your friends, then connect with them in them in the Users tab.'
 			: 'connect with them in them in the Users tab.';
-	const amount = onlineUsers.length < 11 ? numbers[onlineUsers.length] : onlineUsers.length;
+	const amount = usersOnline < 11 ? numbers[usersOnline] : usersOnline;
 	return (
 		<>
 			<CenteredCol>
@@ -23,6 +24,8 @@ const LoggedInHome = () => {
 			<CenteredCol>
 				There {grammar[0]} currently {amount} {grammar[1]} online, {message}
 			</CenteredCol>
+
+			{/* TODO ADD PICTURE OF ONLINE USER EXAMPLE */}
 		</>
 	);
 };

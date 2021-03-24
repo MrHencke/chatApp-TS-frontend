@@ -72,7 +72,7 @@ const SelectedChat = ({ socket }: Props) => {
 	const chatname = chat !== undefined ? chat.name : '';
 	return (
 		<>
-			<div className='col-9 px-0'>
+			<div className='col-sm-12 col-md-12 col-lg-8 col-xl-9 px-0'>
 				<div className='d-flex bg-gray px-4 py-2 bg-light' style={{ height: '3rem' }}>
 					<p className='h5 mb-0 py-1' style={{ width: '50%' }}>
 						<p className='py-1'>{chatname}</p>

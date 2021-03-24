@@ -23,7 +23,7 @@ const ChatSettings = ({ chat, userID, currentChat }: Props) => {
 	return (
 		<div className='ml-auto'>
 			{currentChat ? (
-				<div className="dropleft">
+				<div className='dropleft'>
 					<button
 						className='btn btn-secondary'
 						data-toggle='dropdown'

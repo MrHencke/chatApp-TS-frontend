@@ -53,7 +53,7 @@ const Signup = () => {
 				<div className='col-sm-9 col-md-7 col-lg-5 mx-auto'>
 					<div className='card card-signin my-5' id='roundedCard'>
 						<div className='card-body'>
-							<h5 className='card-title text-center'>Register</h5>
+							<h5 className='card-title text-center'>Sign up</h5>
 							<form
 								className='form-signin'
 								onSubmit={handleSubmit}
@@ -87,12 +87,12 @@ const Signup = () => {
 												id='inputUsername'
 												name='username'
 												className='form-control'
-												placeholder='Username'
+												placeholder='Name'
 												required
 												onChange={handleChange}
-												autoComplete='off'
+												autoComplete='__away'
 											/>
-											<label htmlFor='inputUsername'>Username</label>
+											<label htmlFor='inputUsername'>Name</label>
 										</div>
 
 										<div className='form-label-group'>

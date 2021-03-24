@@ -69,10 +69,11 @@ const Input = ({ socket }: Props) => {
 					type='text'
 					onChange={(e) => handleChange(e)}
 					value={messageBody}
-					className='form-control rounded-0 border-1 bg-light'
+					className='form-control border-1 bg-light'
+					style={{ borderRadius: '2rem' }}
 				/>
 				<div className='input-group-append'>
-					<button type='submit' className='btn'>
+					<button type='submit' className='btn' style={{ borderRadius: '2rem' }}>
 						Send
 					</button>
 				</div>

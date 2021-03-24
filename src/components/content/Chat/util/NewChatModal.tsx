@@ -46,6 +46,7 @@ const NewChatModal = () => {
 				onClick={() => {
 					setShowHide(!showHide);
 				}}
+				style={{ borderRadius: '2rem' }}
 			>
 				New Chat
 			</button>
@@ -86,7 +87,7 @@ const NewChatModal = () => {
 
 					<Modal.Footer>
 						<button
-							className='btn btn-lg btn-primary btn-block'
+							className='btn btn-lg btn-primary btn-block roundedbutton'
 							type='submit'
 							disabled={members.length === 0}
 							onClick={handleSubmit}

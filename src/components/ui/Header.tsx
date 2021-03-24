@@ -6,7 +6,7 @@ import '../../assets/scss/Header.scss';
 import { logout } from '../../store/actions/user/logout';
 
 import { RootState } from '../../store/reducers';
-import { socketDisconnect } from '../../store/actions/app/socketDisconnect';
+import { logoutApp } from '../../store/actions/app/logoutApp';
 
 const Header = () => {
 	const dispatch = useDispatch();
@@ -15,7 +15,7 @@ const Header = () => {
 
 	const logOut = (): void => {
 		dispatch(logout(history));
-		dispatch(socketDisconnect());
+		dispatch(logoutApp());
 	};
 
 	return (

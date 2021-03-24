@@ -29,6 +29,9 @@ const addContact = (formData: { contactID: string }) => API.patch('/users/addcon
 const removeContact = (formData: { contactID: string }) =>
 	API.patch('/users/removecontact', formData);
 
+const deleteAccount = (requestData: { id: string; password: string }) =>
+	API.patch('/users/deleteaccount', requestData);
+
 const getAllUsers = () => API.get('/users/getallusers');
 
-export { login, signup, nameChange, getAllUsers, addContact, removeContact };
+export { login, signup, nameChange, getAllUsers, addContact, removeContact, deleteAccount };
