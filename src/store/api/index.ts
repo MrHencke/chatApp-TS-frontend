@@ -22,10 +22,15 @@ API.interceptors.request.use((req) => {
 });
 
 const login = (formData: ILogin) => API.post('/users/login', formData);
+const continuedSession = () => API.get('/users/continuedsession');
+
 const signup = (formData: ISignup | FormData) => API.post('/users/signup', formData);
 const nameChange = (formData: INameChange) => API.patch('/users/changename', formData);
 
 const addContact = (formData: { contactID: string }) => API.patch('/users/addcontact', formData);
+
+const uploadChatImage = (form: FormData) => API.post('/util/uploadimage', form);
+
 const removeContact = (formData: { contactID: string }) =>
 	API.patch('/users/removecontact', formData);
 
@@ -34,4 +39,14 @@ const deleteAccount = (requestData: { id: string; password: string }) =>
 
 const getAllUsers = () => API.get('/users/getallusers');
 
-export { login, signup, nameChange, getAllUsers, addContact, removeContact, deleteAccount };
+export {
+	login,
+	signup,
+	nameChange,
+	getAllUsers,
+	addContact,
+	removeContact,
+	deleteAccount,
+	continuedSession,
+	uploadChatImage
+};

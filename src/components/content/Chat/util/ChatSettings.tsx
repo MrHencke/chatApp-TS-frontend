@@ -14,11 +14,18 @@ interface Props {
 const ChatSettings = ({ chat, userID, currentChat }: Props) => {
 	const dispatch = useDispatch();
 	const socket = useSelector((state: RootState) => state.app.socket);
+
 	const handleLeave = () => {
 		const chatID = chat._id;
 		dispatch(changeCurrentChat(null));
 		socket!.emit('userLeftChat', { userID, chatID });
 		dispatch(removeChat(chatID));
+	};
+
+	const handleDelete = () => {
+		const chatID = chat._id;
+		socket!.emit('deleteChat', chatID);
+		dispatch(changeCurrentChat(null));
 	};
 	return (
 		<div className='ml-auto'>
@@ -44,8 +51,8 @@ const ChatSettings = ({ chat, userID, currentChat }: Props) => {
 						{userID === chat?.owner ? (
 							<>
 								<div className='dropdown-divider'></div>
-								<button className='dropdown-item rounded'>
-									Delete Chat {/* TODO */}
+								<button className='dropdown-item rounded' onClick={handleDelete}>
+									Delete Chat
 								</button>
 							</>
 						) : null}
