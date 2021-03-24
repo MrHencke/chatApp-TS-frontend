@@ -1,13 +1,18 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../store/reducers';
 import { Modal } from 'react-bootstrap';
 import Select, { ValueType } from 'react-select';
 import { FormEvent, useState } from 'react';
+import { uploadChatImage } from '../../../../store/api';
+import setLoading from '../../../../store/actions/user/setLoading';
 const NewChatModal = () => {
 	const user = useSelector((state: RootState) => state.user);
+	const dispatch = useDispatch();
 	const socket = useSelector((state: RootState) => state.app.socket);
+	const loading = useSelector((state: RootState) => state.user.loading);
 	const [chatName, setChatName] = useState('');
 	const [members, setMembers] = useState<ValueType<OptionsType, true>>([]);
+	const [file, setFile] = useState<File>();
 
 	type OptionsType = { label: string; value: string };
 	let contactOptions: OptionsType[] = [];
@@ -17,22 +22,27 @@ const NewChatModal = () => {
 		});
 	}
 
-	const handleChangeMembers = (options: ValueType<OptionsType, true>) => {
-		setMembers(options);
-	};
-
-	const handleChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setChatName(e.target.value);
-	};
-
-	const handleSubmit = (e: FormEvent) => {
+	const handleSubmit = async (e: FormEvent) => {
 		e.preventDefault();
+		dispatch(setLoading(true));
+		let chatIcon = null;
+
+		if (file) {
+			const form = new FormData();
+			form.append('image', file);
+			await uploadChatImage(form).then((data) => {
+				chatIcon = data.data.chatIcon;
+			});
+		}
+
 		const creatorID = user.profile.id;
 		const _members = members.map((user) => user.value);
-		const data = { name: chatName, creatorID, members: _members };
+		const data = { name: chatName, creatorID, members: _members, chatIcon };
 		socket!.emit('newChat', data);
 		setChatName('');
 		setMembers([]);
+		setFile(undefined);
+		dispatch(setLoading(false));
 		setShowHide(!showHide);
 	};
 
@@ -70,30 +80,50 @@ const NewChatModal = () => {
 								value={chatName}
 								className='form-control'
 								minLength={5}
-								onChange={handleChangeName}
+								onChange={(e) => {
+									setChatName(e.target.value);
+								}}
 							/>
 							<h5 className='pt-5'>Chat Members</h5>
 							<Select
 								options={contactOptions}
 								isSearchable
 								isMulti
-								onChange={(options) => handleChangeMembers(options)}
+								onChange={(options) => {
+									setMembers(options);
+								}}
 								className='select-search-box'
 								placeholder='Search'
 								value={members}
+							/>
+
+							<h5 className='pt-5'>Chat Icon</h5>
+							<input
+								type='file'
+								onChange={(e) => {
+									if (e.target.files) setFile(e.target.files[0]);
+								}}
 							/>
 						</div>
 					</Modal.Body>
 
 					<Modal.Footer>
-						<button
-							className='btn btn-lg btn-primary btn-block roundedbutton'
-							type='submit'
-							disabled={members.length === 0}
-							onClick={handleSubmit}
-						>
-							Start new Chat
-						</button>
+						{loading ? (
+							<div className='text-center'>
+								<div className='spinner-border' role='status'>
+									<span className='sr-only'>Loading...</span>
+								</div>
+							</div>
+						) : (
+							<button
+								className='btn btn-lg btn-primary btn-block roundedbutton'
+								type='submit'
+								disabled={members.length === 0}
+								onClick={handleSubmit}
+							>
+								Start new Chat
+							</button>
+						)}
 					</Modal.Footer>
 				</form>
 			</Modal>

@@ -12,6 +12,7 @@ interface IChat {
 	users: Users[];
 	messages: IMessage[];
 	isTyping?: string[];
+	chatIcon: string;
 }
 
 export type { IChat, Users };

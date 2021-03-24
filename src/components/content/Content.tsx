@@ -10,17 +10,21 @@ import NoAccess from './NoAccess';
 import Userlist from './cards/userlist/Userlist';
 import SocketIOFunctionality from '../../socket/SocketIOFunctionality';
 import Unauthorized from '../ui/Unauthorized';
+import { Socket } from 'socket.io-client';
 
 const Content: FC<MatchProps> = ({ match }) => {
 	const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
 	const currentUrl: string = match.path;
+	const socket: Socket = useSelector((state: RootState) => state.app.socket)!;
+
 	return (
 		<>
 			{currentUrl === '/notoken' && <Unauthorized />}
 
+			{socket ? <SocketIOFunctionality socket={socket} /> : null}
+
 			{isLoggedIn ? (
 				<>
-					<SocketIOFunctionality />
 					{currentUrl === '/' && <Home />}
 					{currentUrl === '/contacts' && <Contacts />}
 					{currentUrl === '/chats/:id' && <ChatWindow />}

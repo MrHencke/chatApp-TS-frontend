@@ -19,12 +19,14 @@ import { logoutApp } from '../store/actions/app/logoutApp';
 import { changeCurrentChat } from '../store/actions/app/changeCurrentChat';
 import { removeChat } from '../store/actions/user/removeChat';
 
-const SocketIOFunctionality = () => {
+interface Props {
+	socket: Socket;
+}
+
+const SocketIOFunctionality = ({ socket }: Props) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
-
-	//@ts-ignore
-	const socket: Socket = useSelector((state: RootState) => state.app.socket);
+	const currentChat = useSelector((state: RootState) => state.app.currentChat);
 	const chats = useSelector((state: RootState) => state.user.chats);
 
 	useEffect(() => {
@@ -154,6 +156,16 @@ const SocketIOFunctionality = () => {
 		});
 		return () => {
 			socket.off('leaveChat');
+		};
+	});
+
+	useEffect(() => {
+		socket.on('deleteChatReturn', (chatID) => {
+			if (currentChat === chatID) dispatch(changeCurrentChat(null));
+			dispatch(removeChat(chatID));
+		});
+		return () => {
+			socket.off('deleteChatReturn');
 		};
 	});
 
