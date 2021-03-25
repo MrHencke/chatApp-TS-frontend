@@ -7,7 +7,6 @@ const ResponsePage = () => {
 	const params: ResponseParameters = useParams();
 	const history = useHistory();
 	const dispatch = useDispatch();
-	console.log(params);
 	if (params.status === 'success') {
 		dispatch(newSocket(history));
 	}

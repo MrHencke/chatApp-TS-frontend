@@ -7,7 +7,6 @@ const nameChange = (formData: IChangeName, router: any) => async (dispatch: Disp
 	await api
 		.nameChange(formData)
 		.then((data) => {
-			console.log(data);
 			if (data) {
 				if (data.status === 200) {
 					dispatch({ type: NAMECHANGE_SUCCESS, payload: data });

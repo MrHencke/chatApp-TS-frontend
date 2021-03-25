@@ -6,7 +6,6 @@ const addContact = (formData: {contactID: string}) => async (dispatch: Dispatch)
 	await api
 		.addContact(formData)
 		.then((data) => {
-			console.log(data);
 			if (data) {
 				if (data.status === 200) {
 					dispatch({ type: ADDCONTACT_SUCCESS, payload: data });
