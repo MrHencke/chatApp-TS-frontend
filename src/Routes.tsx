@@ -1,4 +1,6 @@
-import { Route, Switch } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { Route, Switch, useHistory } from 'react-router-dom';
 import Login from './components/auth/Login';
 import Logout from './components/auth/Logout';
 import Signup from './components/auth/Signup';
@@ -6,8 +8,17 @@ import Content from './components/content/Content';
 import NotFound from './components/ui/NotFound';
 import ResponsePage from './components/ui/ResponsePage';
 import Unauthorized from './components/ui/Unauthorized';
+import { continuedSession } from './store/actions/user/continuedSession';
 
 const Routes = () => {
+	const dispatch = useDispatch();
+	const history = useHistory();
+	useEffect(() => {
+		const profile = localStorage.getItem('profile');
+		if (profile && profile !== undefined && profile !== 'undefined') {
+			dispatch(continuedSession(history));
+		}
+	});
 	return (
 		<Switch>
 			<Route exact path='/' component={Content} />

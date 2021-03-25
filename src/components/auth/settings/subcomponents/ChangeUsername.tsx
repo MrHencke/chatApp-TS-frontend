@@ -14,7 +14,6 @@ const ChangeUsername = () => {
 
 	const handleSubmit = (e: FormEvent) => {
 		e.preventDefault();
-		console.log(form);
 		dispatch(nameChange(form, history));
 	};
 

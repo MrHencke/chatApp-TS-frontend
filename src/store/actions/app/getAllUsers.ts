@@ -6,7 +6,6 @@ const getAllUsers = () => async (dispatch: Dispatch) => {
 	await api
 		.getAllUsers()
 		.then((data) => {
-			console.log(data);
 			if (data) {
 				if (data.status === 200) {
 					dispatch({ type: GETALLUSERS_SUCCESS, payload: data });
