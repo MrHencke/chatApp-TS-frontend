@@ -1,9 +1,10 @@
 
-<a href="https://thechatapp-hencke.netlify.app/">Demo</a>
-
-</div>
-
 <h1 align="center">Chatapp Frontend</h1>
+<div align="center">
+<a href="https://thechatapp-hencke.netlify.app/">Demo</a>
+ </div>
+ 
+ <br/>
 
 <p align="center">
   <img alt="Github top language" src="https://img.shields.io/github/languages/top/MrHencke/chatApp-TS-frontend?color=56BEB8">
