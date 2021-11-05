@@ -34,11 +34,11 @@ This is my first attempt at a react project, hastily developed in about a week o
 
 ## :sparkles: Features
 
-:heavy_check_mark: Socket-IO powered real time messaging
-:heavy_check_mark: REST API powered fetching of user data
-:heavy_check_mark: Automatically continued logged in sessions
-:heavy_check_mark: Joining and leaving chats
-:heavy_check_mark: Different chat permissions for owners and members
+-    Socket-IO powered real time messaging
+-    REST API powered fetching of user data
+-    Automatically continued logged in sessions
+-    Joining and leaving chats
+-    Different chat permissions for owners and members
 
 ## :rocket: Technologies
 
